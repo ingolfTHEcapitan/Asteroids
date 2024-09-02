@@ -2,21 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameInput : MonoBehaviour
+namespace Asteroids
 {
-	public static GameInput Instance { get; private set;}
-	private SpaceshipInputActions _spaceshipInputActions;
-	
-	public Vector2 MovementInput { get => _spaceshipInputActions.Keyboard.Move.ReadValue<Vector2>();}
-	public float RotationInput { get => _spaceshipInputActions.Keyboard.Rotation.ReadValue<float>();}
-	public SpaceshipInputActions SpaceshipInputActions { get => _spaceshipInputActions;}
-
-	void Awake()
+	public class GameInput : MonoBehaviour
 	{
-		Instance = this;
-		_spaceshipInputActions = new SpaceshipInputActions();
-		_spaceshipInputActions.Enable();	
-	}
-	
+		public static GameInput Instance { get; private set;}
+		private SpaceshipInputActions _spaceshipInputActions;
+		
+		public Vector2 MovementInput { get => _spaceshipInputActions.Keyboard.Move.ReadValue<Vector2>();}
+		public float RotationInput { get => _spaceshipInputActions.Keyboard.Rotation.ReadValue<float>();}
+		public SpaceshipInputActions SpaceshipInputActions { get => _spaceshipInputActions;}
 
+		void Awake()
+		{
+			if (Instance != null && Instance != this)
+				Destroy(Instance);
+			else
+				Instance = this;
+			
+			_spaceshipInputActions = new SpaceshipInputActions();
+			_spaceshipInputActions.Enable();	
+		}
+		
+
+	}
 }

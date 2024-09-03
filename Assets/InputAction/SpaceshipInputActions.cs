@@ -44,6 +44,15 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""1c8f21d1-34e7-471b-82a2-0b153fd29225"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -101,6 +110,17 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
                     ""action"": ""Rotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""957b5542-f44b-40ed-8eb0-4e4058f224b2"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -111,6 +131,7 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
         m_Keyboard_Move = m_Keyboard.FindAction("Move", throwIfNotFound: true);
         m_Keyboard_Rotation = m_Keyboard.FindAction("Rotation", throwIfNotFound: true);
+        m_Keyboard_Shoot = m_Keyboard.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -174,12 +195,14 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
     private List<IKeyboardActions> m_KeyboardActionsCallbackInterfaces = new List<IKeyboardActions>();
     private readonly InputAction m_Keyboard_Move;
     private readonly InputAction m_Keyboard_Rotation;
+    private readonly InputAction m_Keyboard_Shoot;
     public struct KeyboardActions
     {
         private @SpaceshipInputActions m_Wrapper;
         public KeyboardActions(@SpaceshipInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Keyboard_Move;
         public InputAction @Rotation => m_Wrapper.m_Keyboard_Rotation;
+        public InputAction @Shoot => m_Wrapper.m_Keyboard_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -195,6 +218,9 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
             @Rotation.started += instance.OnRotation;
             @Rotation.performed += instance.OnRotation;
             @Rotation.canceled += instance.OnRotation;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
         }
 
         private void UnregisterCallbacks(IKeyboardActions instance)
@@ -205,6 +231,9 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
             @Rotation.started -= instance.OnRotation;
             @Rotation.performed -= instance.OnRotation;
             @Rotation.canceled -= instance.OnRotation;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
         }
 
         public void RemoveCallbacks(IKeyboardActions instance)
@@ -226,5 +255,6 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }

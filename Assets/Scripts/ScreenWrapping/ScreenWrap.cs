@@ -19,7 +19,6 @@ namespace Asteroids
 
 		public void ColiderWrapper(Collider2D collider)
 	   	{
-			Debug.Log(collider.name);
 			Vector3 newPosition = CalculateWrappedPosirion(collider.transform.position);
 			collider.gameObject.transform.position = newPosition;
 	   	}

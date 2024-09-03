@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asteroids
@@ -22,8 +20,8 @@ namespace Asteroids
 			
 			_spaceshipInputActions = new SpaceshipInputActions();
 			_spaceshipInputActions.Enable();	
+			
+			_spaceshipInputActions.Keyboard.Shoot.performed += (_) => EventManager.OnPlayerShooted();
 		}
-		
-
 	}
 }

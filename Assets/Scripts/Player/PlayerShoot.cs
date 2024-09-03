@@ -1,0 +1,35 @@
+using UnityEngine;
+
+namespace Asteroids
+{
+	public class PlayerShoot : MonoBehaviour
+	{
+		[SerializeField] private Laser _laserPrafab;
+		[SerializeField] private Transform _laserSpawnPoint;
+		[SerializeField] private float _fireRate;
+		private float _curentReloadTime;
+
+		private void Start()
+		{
+			EventManager.PlayerShooted += OnPlayerShooted;
+		}
+		
+		public void OnPlayerShooted()
+		{
+			if (_curentReloadTime <= 0)
+			{
+				Laser laser = Instantiate(_laserPrafab, _laserSpawnPoint.position, transform.rotation);
+				laser.Project(transform.up);
+				_curentReloadTime = 1 / _fireRate;
+			}
+		}
+
+		void Update()
+		{
+			if (_curentReloadTime > 0)
+			{
+				_curentReloadTime -= Time.deltaTime;
+			}
+		}
+	}
+}

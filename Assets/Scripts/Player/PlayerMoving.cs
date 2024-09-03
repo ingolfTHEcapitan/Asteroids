@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asteroids
@@ -9,8 +7,7 @@ namespace Asteroids
 	{
 		[SerializeField] private float _trustSpeed;
 		[SerializeField] private float _turnSpeed;
-		[SerializeField] private ScreenBounds _screenBounds;
-		
+
 		private Rigidbody2D _rigidbody;
 		private Vector2 _inputMoving;
 		private float _inputRotation;

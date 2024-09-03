@@ -36,6 +36,8 @@ namespace Asteroids
 					Quaternion rotation = Quaternion.AngleAxis(variance, Vector3.forward);
 					
 					Asteroid asteroid = Instantiate(_asteroidPrefab, spawnPoint, rotation);
+					asteroid.Size = Random.Range(asteroid.MinSize, asteroid.MaxSize);
+					
 					// Ќаправление отрицательное так как изначально астероид движетс€ из крруга, а надо в круг
 					asteroid.SetTrajectory(rotation * -spawnDirection);
 				}

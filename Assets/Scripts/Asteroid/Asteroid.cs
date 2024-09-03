@@ -10,12 +10,15 @@ namespace Asteroids
 		[SerializeField] private float _minSize = 0.5f;
 		[SerializeField] private float _maxSize = 1.5f;
 		[SerializeField] private float _speed = 50;
-		private float _currentSize;
 		private SpriteRenderer _spriteRenderer;
 		private Rigidbody2D _rigidbody2D;
-		
+		private float _size = 1.0f;
 
-		void Awake()
+        public float Size { get => _size; set => _size = value; }
+        public float MaxSize { get => _maxSize; private set => _maxSize = value; }
+        public float MinSize { get => _minSize; private set => _minSize = value; }
+
+        void Awake()
 		{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_rigidbody2D = GetComponent<Rigidbody2D>();
@@ -23,12 +26,11 @@ namespace Asteroids
 		
 		private void Start()
 		{
-			_currentSize = Random.Range(_minSize, _maxSize);
-			
 			_spriteRenderer.sprite = _asteroids[Random.Range(0, _asteroids.Length)];
+			
 			transform.eulerAngles = new Vector3(0, 0, Random.value * 360.0f);
-			transform.localScale = Vector3.one * _currentSize;
-			_rigidbody2D.mass = _currentSize;
+			transform.localScale = Vector3.one * Size;
+			_rigidbody2D.mass = Size;
 		}
 		
 		public void SetTrajectory(Vector3 direction)
@@ -41,7 +43,7 @@ namespace Asteroids
 	
 			if (collision.gameObject.tag == "Laser")
 			{
-				if ((_currentSize * 0.5) >= _minSize)
+				if ((Size * 0.5) >= _minSize)
 				{
 					SplitAsteroid();
 					SplitAsteroid();
@@ -51,16 +53,15 @@ namespace Asteroids
 			}
 		}
 		
-		private Asteroid SplitAsteroid()
+		private void SplitAsteroid()
 		{
 			Vector2 position = transform.position;
 			position += Random.insideUnitCircle * 0.5f;
 			
 			Asteroid halfAsteroid = Instantiate(this, position, transform.rotation);
-			halfAsteroid._currentSize = _currentSize * 0.3f;
+			halfAsteroid.Size = Size * 0.5f;
 			
-			halfAsteroid.SetTrajectory(Random.insideUnitCircle.normalized);
-			return halfAsteroid;
+			halfAsteroid.SetTrajectory(Random.insideUnitCircle.normalized * _speed);
 		}
 		
 		

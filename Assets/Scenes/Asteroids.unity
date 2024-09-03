@@ -625,7 +625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _laserPrafab: {fileID: 2888776757168798255, guid: 6eb63690372d18e4599e00b9b51bf2b1, type: 3}
   _laserSpawnPoint: {fileID: 172438644}
-  _fireRate: 2
+  _fireRate: 5
 --- !u!1 &610106592
 GameObject:
   m_ObjectHideFlags: 0

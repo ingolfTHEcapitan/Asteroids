@@ -36,6 +36,33 @@ namespace Asteroids
 			_rigidbody2D.AddForce(direction * _speed);
 		}
 
+		void OnCollisionEnter2D(Collision2D collision)
+		{
+	
+			if (collision.gameObject.tag == "Laser")
+			{
+				if ((_currentSize * 0.5) >= _minSize)
+				{
+					SplitAsteroid();
+					SplitAsteroid();
+				}
+					
+				Destroy(gameObject);
+			}
+		}
+		
+		private Asteroid SplitAsteroid()
+		{
+			Vector2 position = transform.position;
+			position += Random.insideUnitCircle * 0.5f;
+			
+			Asteroid halfAsteroid = Instantiate(this, position, transform.rotation);
+			halfAsteroid._currentSize = _currentSize * 0.3f;
+			
+			halfAsteroid.SetTrajectory(Random.insideUnitCircle.normalized);
+			return halfAsteroid;
+		}
+		
 		
 	}
 }

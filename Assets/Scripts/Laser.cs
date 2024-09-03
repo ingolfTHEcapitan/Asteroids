@@ -20,5 +20,10 @@ namespace Asteroids
 			
 			Destroy(gameObject, _lifeTime);
 		}
+		
+		void OnCollisionExit2D(Collision2D other)
+		{
+			Destroy(gameObject);
+		}
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,9 +7,6 @@ namespace Asteroids
 	[RequireComponent(typeof(BoxCollider2D))]
 	public class ScreenBounds : MonoBehaviour
 	{
-		[SerializeField] public UnityEvent<Collider2D> ExitTriggerFired;
-		
-
 		private BoxCollider2D _boxCollider2D;
 		private Camera _mainCamera;
 
@@ -34,9 +32,9 @@ namespace Asteroids
 			_boxCollider2D.size = boxColiderSize;
 		}
 
-		void OnTriggerExit2D(Collider2D other)
+		void OnTriggerExit2D(Collider2D collider)
 		{
-			ExitTriggerFired?.Invoke(other);          
+			EventManager.OnExitTriggerFired(collider);          
 		}
 
 		

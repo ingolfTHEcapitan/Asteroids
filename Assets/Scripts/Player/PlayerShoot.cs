@@ -24,12 +24,17 @@ namespace Asteroids
 			}
 		}
 
-		void Update()
+		public void Update()
 		{
 			if (_curentReloadTime > 0)
 			{
 				_curentReloadTime -= Time.deltaTime;
 			}
+		}
+		
+		public void OnDestroy()
+		{
+			EventManager.PlayerShooted -= OnPlayerShooted;
 		}
 	}
 }

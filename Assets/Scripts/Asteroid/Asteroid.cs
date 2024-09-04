@@ -4,7 +4,7 @@ namespace Asteroids
 {
 	[RequireComponent(typeof(SpriteRenderer))]
 	[RequireComponent(typeof(Rigidbody2D))]
-	public class Asteroid : MonoBehaviour
+	public class Asteroid : MonoBehaviour, IScreenWrappable
 	{
 		[SerializeField] private Sprite[] _asteroids;
 		[SerializeField] private float _minSize = 0.5f;
@@ -41,7 +41,7 @@ namespace Asteroids
 		void OnCollisionEnter2D(Collision2D collision)
 		{
 	
-			if (collision.gameObject.tag == "Laser")
+			if (collision.gameObject.GetComponent<Laser>() != null)
 			{
 				if ((Size * 0.5) >= _minSize)
 				{
@@ -61,7 +61,7 @@ namespace Asteroids
 			Asteroid halfAsteroid = Instantiate(this, position, transform.rotation);
 			halfAsteroid.Size = Size * 0.5f;
 			
-			halfAsteroid.SetTrajectory(Random.insideUnitCircle.normalized * _speed);
+			halfAsteroid.SetTrajectory(Random.insideUnitCircle.normalized);
 		}
 		
 		

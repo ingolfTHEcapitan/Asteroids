@@ -15,17 +15,16 @@ namespace Asteroids
 		private void Awake() 
 		{
 			_boxCollider2D = GetComponent<BoxCollider2D>();
+			EventManager.ExitTriggerFired += ColiderWrapper;
 		}
-
+		
 		public void ColiderWrapper(Collider2D collider)
 	   	{
-			if (collider.GetComponent<WrappedTrigger>())
+			if (collider.TryGetComponent<IScreenWrappable>(out var _))
 			{
 				Vector3 newPosition = CalculateWrappedPosirion(collider.transform.position);
 				collider.gameObject.transform.position = newPosition;
 			}
-			
-			
 	   	}
 		
 		public Vector3 CalculateWrappedPosirion(Vector3 worldPosition)
@@ -64,5 +63,10 @@ namespace Asteroids
 				return worldPosition;
 			}	
 		}	
+		
+		private void OnDestroy()
+		{
+			EventManager.ExitTriggerFired -= ColiderWrapper;
+		}
 	}
 }

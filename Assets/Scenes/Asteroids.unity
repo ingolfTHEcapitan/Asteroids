@@ -347,21 +347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d76c3cf7404604fa1434e49227eb76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExitTriggerFired:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 485753252}
-        m_TargetAssemblyTypeName: MyProject.BoundsWrapper, Assembly-CSharp
-        m_MethodName: ColiderWrapper
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
 --- !u!61 &485753250
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -514,6 +499,7 @@ GameObject:
   - component: {fileID: 554426491}
   - component: {fileID: 554426488}
   - component: {fileID: 554426492}
+  - component: {fileID: 554426493}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -626,6 +612,19 @@ MonoBehaviour:
   _laserPrafab: {fileID: 2888776757168798255, guid: 6eb63690372d18e4599e00b9b51bf2b1, type: 3}
   _laserSpawnPoint: {fileID: 172438644}
   _fireRate: 5
+--- !u!114 &554426493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554426483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8b2fa005bf9cad4f80f0e20f62a07c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxLives: 3
 --- !u!1 &610106592
 GameObject:
   m_ObjectHideFlags: 0

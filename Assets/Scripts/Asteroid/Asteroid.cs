@@ -10,15 +10,16 @@ namespace Asteroids
 		[SerializeField] private float _minSize = 0.5f;
 		[SerializeField] private float _maxSize = 1.5f;
 		[SerializeField] private float _speed = 50;
+		
 		private SpriteRenderer _spriteRenderer;
 		private Rigidbody2D _rigidbody2D;
 		private float _size = 1.0f;
 
-        public float Size { get => _size; set => _size = value; }
-        public float MaxSize { get => _maxSize; private set => _maxSize = value; }
-        public float MinSize { get => _minSize; private set => _minSize = value; }
+		public float Size { get => _size; set => _size = value; }
+		public float MaxSize { get => _maxSize; private set => _maxSize = value; }
+		public float MinSize { get => _minSize; private set => _minSize = value; }
 
-        void Awake()
+		void Awake()
 		{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_rigidbody2D = GetComponent<Rigidbody2D>();
@@ -62,8 +63,6 @@ namespace Asteroids
 			halfAsteroid.Size = Size * 0.5f;
 			
 			halfAsteroid.SetTrajectory(Random.insideUnitCircle.normalized);
-		}
-		
-		
+		}	
 	}
 }

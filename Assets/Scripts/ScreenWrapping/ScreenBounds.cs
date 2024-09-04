@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Asteroids
 {
@@ -34,7 +32,7 @@ namespace Asteroids
 
 		void OnTriggerExit2D(Collider2D collider)
 		{
-			EventManager.OnExitTriggerFired(collider);          
+			GameEvents.OnExitTriggerFired(collider);          
 		}
 
 		

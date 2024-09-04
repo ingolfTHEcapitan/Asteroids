@@ -21,7 +21,7 @@ namespace Asteroids
 			_spaceshipInputActions = new SpaceshipInputActions();
 			_spaceshipInputActions.Enable();	
 			
-			_spaceshipInputActions.Keyboard.Shoot.performed += (_) => EventManager.OnPlayerShooted();
+			_spaceshipInputActions.Keyboard.Shoot.performed += (_) => GameEvents.OnPlayerShooted();
 		}
 	}
 }

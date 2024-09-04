@@ -35,5 +35,15 @@ namespace Asteroids
 				_rigidbody.AddTorque(_inputRotation * _turnSpeed);
 			}
 		}
+		
+		void OnCollisionEnter2D(Collision2D collision)
+		{
+			if (collision.gameObject.GetComponent<Asteroid>() != null)
+			{
+				_rigidbody.velocity = Vector2.zero;
+				_rigidbody.angularVelocity = 0.0f;
+				GameEvents.OnPlayerDied();
+			}
+		}                       
 	}
 }

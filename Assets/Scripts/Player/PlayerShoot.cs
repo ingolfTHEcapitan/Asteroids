@@ -7,12 +7,12 @@ namespace Asteroids
 		[SerializeField] private Laser _laserPrafab;
 		[SerializeField] private Transform _laserSpawnPoint;
 		[SerializeField] private float _fireRate;
+		
 		private float _curentReloadTime;
 
-		private void Start()
-		{
-			EventManager.PlayerShooted += OnPlayerShooted;
-		}
+		private void OnEnable() => GameEvents.PlayerShooted += OnPlayerShooted;
+		private void OnDisable() => GameEvents.PlayerShooted -= OnPlayerShooted;
+		private void OnDestroy() => GameEvents.PlayerShooted -= OnPlayerShooted;
 		
 		public void OnPlayerShooted()
 		{
@@ -30,11 +30,6 @@ namespace Asteroids
 			{
 				_curentReloadTime -= Time.deltaTime;
 			}
-		}
-		
-		public void OnDestroy()
-		{
-			EventManager.PlayerShooted -= OnPlayerShooted;
 		}
 	}
 }

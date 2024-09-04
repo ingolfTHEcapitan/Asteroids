@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asteroids
@@ -15,7 +13,7 @@ namespace Asteroids
 		private void Awake() 
 		{
 			_boxCollider2D = GetComponent<BoxCollider2D>();
-			EventManager.ExitTriggerFired += ColiderWrapper;
+			GameEvents.ExitTriggerFired += ColiderWrapper;
 		}
 		
 		public void ColiderWrapper(Collider2D collider)
@@ -66,7 +64,7 @@ namespace Asteroids
 		
 		private void OnDestroy()
 		{
-			EventManager.ExitTriggerFired -= ColiderWrapper;
+			GameEvents.ExitTriggerFired -= ColiderWrapper;
 		}
 	}
 }

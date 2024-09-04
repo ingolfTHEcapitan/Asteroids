@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asteroids
@@ -11,8 +10,6 @@ namespace Asteroids
 		[SerializeField] private float _spawnAmount = 3.0f;
 		[SerializeField] private float _spawnDistanse = 15.0f;
 		[SerializeField] private float _trajectoryVariance = 15.0f;
-		
-		
 		
 		private void Start()
 		{

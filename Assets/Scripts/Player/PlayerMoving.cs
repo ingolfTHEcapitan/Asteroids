@@ -43,7 +43,7 @@ namespace Asteroids
 				_rigidbody.velocity = Vector2.zero;
 				_rigidbody.angularVelocity = 0.0f;
 				
-				gameObject.SetActive(false);
+				//gameObject.SetActive(false);
 				GameEvents.OnPlayerDied();
 			}
 		}                       

@@ -30,6 +30,9 @@ namespace Asteroids
 			_animator.SetFloat("Speed", GameInput.Instance.MovementInput.magnitude);
 		}
 		
+		private void OnEnable() => GameEvents.PlayerDied += ()=> _animator.SetTrigger("Die");
+		
+	
 		public IEnumerator BkinlingRoutine()
 		{
 			float endTime = Time.time + blinkDuration;

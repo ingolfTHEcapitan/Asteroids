@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 201400378}
   - component: {fileID: 201400377}
   m_Layer: 0
-  m_Name: GameInput
+  m_Name: Game Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,6 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3e5ed34d5de4d47b72ebb0d89e5233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkInterval: 0.25
+  blinkDuration: 3
 --- !u!95 &354531206
 Animator:
   serializedVersion: 5
@@ -316,6 +318,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &390318683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 390318685}
+  - component: {fileID: 390318684}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &390318684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390318683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6b71cb4528237a49a3e0421ec6f7e42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _respawnTime: 1
+--- !u!4 &390318685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390318683}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &485753248
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,7 +719,7 @@ MonoBehaviour:
   _asteroidPrefab: {fileID: 4638799115538287464, guid: 0108c0c6ede660c4ab9f0e84a99af469, type: 3}
   _spawnDelay: 5
   _spawnAmount: 3
-  _spawnDistanse: 20
+  _spawnDistanse: 18
   _trajectoryVariance: 15
 --- !u!1 &965560172
 GameObject:

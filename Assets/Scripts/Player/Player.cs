@@ -8,49 +8,20 @@ namespace Asteroids
 {
 	public class Player : MonoBehaviour, IScreenWrappable
 	{
+		public static Player Instance { get; private set; }
+		
 		[SerializeField] private int _maxLives = 3;
-		[SerializeField] private float blinkInterval = 0.25f; // Интервал мигания в секундах
-		[SerializeField] private float blinkDuration = 3f;   // Продолжительность мигания в секундах
-
-		[SerializeField] private SpriteRenderer _spriteRenderer;
-		private int _currentLives;
+		
+		public int CurrentLives {get; set;}
 
 		void Awake()
 		{
-			_currentLives = _maxLives;
-		}
-
-		private void OnEnable() => GameEvents.PlayerDied += OnPlayerDied;
-		private void OnDestroy() => GameEvents.PlayerDied -= OnPlayerDied;
-
-		private void OnPlayerDied()
-		{
-			_currentLives--;
-			StartCoroutine(DiedRotine());
-		}
-
-		private IEnumerator DiedRotine()
-		{
-			gameObject.layer = LayerMask.NameToLayer("IgnoreAsteroidCollision");
-			_spriteRenderer.enabled = false;
-			transform.position = Vector3.zero;
-			transform.right = Vector3.zero;
-			yield return new WaitForSeconds(2);
-
-
-			float endTime = Time.time + blinkDuration;
-			while (Time.time < endTime)
-			{
-				// Переключаем видимость спрайта
-				_spriteRenderer.enabled = !_spriteRenderer.enabled;
-
-				// Ждем указанный интервал
-				yield return new WaitForSeconds(blinkInterval);
-			}
-
-			// Убедимся, что спрайт видим по окончании мигания
-			_spriteRenderer.enabled = true;
-			gameObject.layer = LayerMask.NameToLayer("Player");
+			if (Instance != null && Instance != this)
+				Destroy(Instance);
+			else
+				Instance = this;
+			
+			CurrentLives = _maxLives;
 		}
 	}
 }

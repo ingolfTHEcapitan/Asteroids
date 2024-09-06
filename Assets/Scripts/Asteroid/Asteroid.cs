@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Asteroids
@@ -13,6 +14,7 @@ namespace Asteroids
 		
 		private SpriteRenderer _spriteRenderer;
 		private Rigidbody2D _rigidbody2D;
+		private Animator _animator;
 		private float _size = 1.0f;
 
 		public float Size { get => _size; set => _size = value; }
@@ -23,6 +25,7 @@ namespace Asteroids
 		{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_rigidbody2D = GetComponent<Rigidbody2D>();
+			_animator = GetComponent<Animator>();
 		}
 		
 		private void Start()
@@ -49,8 +52,8 @@ namespace Asteroids
 					SplitAsteroid();
 					SplitAsteroid();
 				}
-					
-				Destroy(gameObject);
+				
+				StartCoroutine(DestroyRoutine());
 			}
 		}
 		
@@ -64,5 +67,13 @@ namespace Asteroids
 			
 			halfAsteroid.SetTrajectory(Random.insideUnitCircle.normalized);
 		}	
+		
+		
+		private IEnumerator DestroyRoutine()
+		{
+			_animator.Play("AsteroidBlowup");
+			yield return new WaitForSeconds(0.7f);
+			Destroy(gameObject);
+		}
 	}
 }

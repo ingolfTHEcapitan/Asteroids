@@ -11,7 +11,6 @@ namespace Asteroids
 		private float _curentReloadTime;
 
 		private void OnEnable() => GameEvents.PlayerShooted += OnPlayerShooted;
-		private void OnDisable() => GameEvents.PlayerShooted -= OnPlayerShooted;
 		private void OnDestroy() => GameEvents.PlayerShooted -= OnPlayerShooted;
 		
 		public void OnPlayerShooted()

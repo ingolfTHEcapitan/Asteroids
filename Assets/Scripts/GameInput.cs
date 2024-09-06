@@ -1,15 +1,15 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Asteroids
 {
 	public class GameInput : MonoBehaviour
 	{
 		public static GameInput Instance { get; private set;}
-		private SpaceshipInputActions _spaceshipInputActions;
-		
-		public Vector2 MovementInput { get => _spaceshipInputActions.Keyboard.Move.ReadValue<Vector2>();}
-		public float RotationInput { get => _spaceshipInputActions.Keyboard.Rotation.ReadValue<float>();}
-		public SpaceshipInputActions SpaceshipInputActions { get => _spaceshipInputActions;}
+
+		public Vector2 MovementInput { get => SpaceshipInputActions.Keyboard.Move.ReadValue<Vector2>();}
+		public float RotationInput { get => SpaceshipInputActions.Keyboard.Rotation.ReadValue<float>();}
+		public SpaceshipInputActions SpaceshipInputActions { get; set;}
 
 		void Awake()
 		{
@@ -18,10 +18,18 @@ namespace Asteroids
 			else
 				Instance = this;
 			
-			_spaceshipInputActions = new SpaceshipInputActions();
-			_spaceshipInputActions.Enable();	
+			SpaceshipInputActions = new SpaceshipInputActions();
+			SpaceshipInputActions.Enable();	
 			
-			_spaceshipInputActions.Keyboard.Shoot.performed += (_) => GameEvents.OnPlayerShooted();
+			SpaceshipInputActions.Keyboard.Shoot.performed += (_) => GameEvents.OnPlayerShooted();
+		}
+		
+		void OnEnable() => GameEvents.PlayerDied += OnPlayerDied;
+		void OnDestroy() => GameEvents.PlayerDied -= OnPlayerDied;
+		
+		private void OnPlayerDied()
+		{
+			SpaceshipInputActions.Disable();
 		}
 	}
 }

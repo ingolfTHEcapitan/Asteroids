@@ -25,5 +25,9 @@ namespace Asteroids
 		{
 			Destroy(gameObject);
 		}
+		void OnCollisionEnter(Collision other)
+		{
+			Destroy(gameObject);
+		}
 	}
 }

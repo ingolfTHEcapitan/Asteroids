@@ -28,19 +28,24 @@ namespace Asteroids
 		
 		private void OnPlayerDied()
 		{
+			Player.Instance.gameObject.layer = LayerMask.NameToLayer("IgnoreAsteroidCollision");
+			_animator.SetTrigger("Die");
+			
+			
+		}
+		
+		
+		public void StartBkinling()
+		{
 			StartCoroutine(BkinlingRoutine());
 		}
 		
 		
 		public IEnumerator BkinlingRoutine()
 		{
-			Player.Instance.gameObject.layer = LayerMask.NameToLayer("IgnoreAsteroidCollision");
-			_animator.SetBool("Die", true);
-			yield return new WaitForSeconds(0.6f);
-			Player.Instance.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+			_spriteRenderer.enabled = false;
 			yield return new WaitForSeconds(1);
-			_animator.SetBool("Die", false);
-		
+			_spriteRenderer.enabled = true;
 			GameInput.Instance.SpaceshipInputActions.Enable();
 			
 			float endTime = Time.time + blinkDuration;

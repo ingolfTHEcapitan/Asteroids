@@ -152,7 +152,7 @@ MonoBehaviour:
   - {fileID: 60297731, guid: 31096fe078601f24e94e807dd1ac84b3, type: 3}
   _minSize: 0.5
   _maxSize: 1.5
-  _speed: 10
+  _speed: 8
 --- !u!95 &7857027259255114502
 Animator:
   serializedVersion: 5

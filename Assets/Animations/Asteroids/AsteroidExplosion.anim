@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AsteroidBlowup
+  m_Name: AsteroidExplosion
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -37,6 +37,8 @@ AnimationClip:
       value: {fileID: 775966094, guid: a8651f807494df44fbd56b0a2cc1a805, type: 3}
     - time: 0.8
       value: {fileID: 0}
+    - time: 0.9
+      value: {fileID: 0}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -65,12 +67,13 @@ AnimationClip:
     - {fileID: 373993019, guid: a8651f807494df44fbd56b0a2cc1a805, type: 3}
     - {fileID: 775966094, guid: a8651f807494df44fbd56b0a2cc1a805, type: 3}
     - {fileID: 0}
+    - {fileID: 0}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.90000004
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -91,7 +94,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.9
-    functionName: 
+    functionName: DestroyAsteroid
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 6d3e5ed34d5de4d47b72ebb0d89e5233, type: 3}
     floatParameter: 0

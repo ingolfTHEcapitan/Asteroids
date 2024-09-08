@@ -30,10 +30,7 @@ namespace Asteroids
 		{
 			Player.Instance.gameObject.layer = LayerMask.NameToLayer("IgnoreAsteroidCollision");
 			_animator.SetTrigger("Die");
-			
-			
 		}
-		
 		
 		public void StartBkinling()
 		{

@@ -15,7 +15,9 @@ namespace Asteroids
 		private SpriteRenderer _spriteRenderer;
 		private Rigidbody2D _rigidbody2D;
 		private Animator _animator;
+		private BoxCollider2D _boxCollider2D;
 		private float _size = 1.0f;
+		private bool _isDestroyed = false;
 
 		public float Size { get => _size; set => _size = value; }
 		public float MaxSize { get => _maxSize; private set => _maxSize = value; }
@@ -26,6 +28,7 @@ namespace Asteroids
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_rigidbody2D = GetComponent<Rigidbody2D>();
 			_animator = GetComponent<Animator>();
+			_boxCollider2D = GetComponent<BoxCollider2D>();
 		}
 		
 		private void Start()
@@ -44,8 +47,8 @@ namespace Asteroids
 
 		void OnCollisionEnter2D(Collision2D collision)
 		{
-	
-			if (collision.gameObject.GetComponent<Laser>() != null)
+
+			if (!_isDestroyed && collision.gameObject.GetComponent<Laser>() != null)
 			{
 				if ((Size * 0.5) >= _minSize)
 				{
@@ -53,7 +56,12 @@ namespace Asteroids
 					SplitAsteroid();
 				}
 				
-				StartCoroutine(DestroyRoutine());
+				// Переключаем коладер в редим тригера что бы избежать столкновений
+				_boxCollider2D.isTrigger = true;
+				
+				_isDestroyed = true;
+				_animator.Play("AsteroidExplosion");
+				GameEvents.OnAsteroidExplosion(this);
 			}
 		}
 		
@@ -68,11 +76,8 @@ namespace Asteroids
 			halfAsteroid.SetTrajectory(Random.insideUnitCircle.normalized);
 		}	
 		
-		
-		private IEnumerator DestroyRoutine()
+		public void DestroyAsteroid()
 		{
-			_animator.Play("AsteroidBlowup");
-			yield return new WaitForSeconds(0.7f);
 			Destroy(gameObject);
 		}
 	}

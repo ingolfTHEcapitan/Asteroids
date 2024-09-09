@@ -40,11 +40,10 @@ namespace Asteroids
 		{
 			if (collision.gameObject.GetComponent<Asteroid>() != null)
 			{
-				Player.Instance.CurrentLives--;
 				_rigidbody.velocity = Vector2.zero;
 				_rigidbody.angularVelocity = 0.0f;
-				transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-				GameEvents.OnPlayerDied();
+				
+				GameEvents.OnPlayerTakeHit();
 			}
 		}                       
 	}

@@ -17,38 +17,43 @@ namespace Asteroids
 			_animator = GetComponent<Animator>();
 			_spriteRenderer = GetComponent<SpriteRenderer>();	
 		}
-		
-		void OnEnable() => GameEvents.PlayerDied += OnPlayerDied;
-		void OnDestroy() => GameEvents.PlayerDied -= OnPlayerDied;
+
+		void OnEnable()
+		{
+			GameEvents.PlayerRespawned += OnPlayerRespawned;
+			GameEvents.PlayerDied += OnPlayerDied;
+		}
 
 		void Update()
 		{
 			_animator.SetFloat("Speed", GameInput.Instance.MovementInput.magnitude);
 		}
 		
+		private void OnPlayerRespawned()
+		{
+			Player.Instance.gameObject.layer = LayerMask.NameToLayer("IgnoreAsteroidCollision");
+			_animator.SetTrigger("Explosion");
+		}
+		
+		// Проверка под конец анимации взрыва
+		public void OnPlayerExplosion()
+		{
+			if (Player.Instance.CurrentLives <= 0)
+				GameEvents.OnPlayerDied();
+			else
+				StartCoroutine(BkinlingRoutine());
+		}
+		
 		private void OnPlayerDied()
 		{
-			if (Player.Instance.CurrentLives <=0)
-			{
-				GameInput.PlayerInput.SwitchCurrentActionMap("Keyboard");
-				return;
-			}
-				
-			Player.Instance.gameObject.layer = LayerMask.NameToLayer("IgnoreAsteroidCollision");
-			_animator.SetTrigger("Die");
+			GameInput.PlayerInput.SwitchCurrentActionMap("Keyboard");
+			Player.Instance.gameObject.layer = LayerMask.NameToLayer("Player");
 		}
-		
-		public void StartBkinling()
-		{
-			StartCoroutine(BkinlingRoutine());
-		}
-		
 		
 		public IEnumerator BkinlingRoutine()
 		{
-			_spriteRenderer.enabled = false;
-			yield return new WaitForSeconds(1);
-			_spriteRenderer.enabled = true;
+			
+			Player.Instance.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
 			GameInput.PlayerInput.SwitchCurrentActionMap("Keyboard");
 			
 			float endTime = Time.time + blinkDuration;

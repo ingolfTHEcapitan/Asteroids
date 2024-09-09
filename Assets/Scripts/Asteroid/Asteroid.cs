@@ -32,7 +32,7 @@ namespace Asteroids
 			_boxCollider2D = GetComponent<BoxCollider2D>();
 		}
 
-		private void OnEnable() => GameEvents.NewGameStarted += OnNewGameStarted;
+		private void OnEnable() => GameEvents.PlayerDied += NewGame;
 
 
 		private void Start()
@@ -85,12 +85,12 @@ namespace Asteroids
 			Destroy(gameObject);
 		}
 		
-		private void OnNewGameStarted()
-		{
-			List<Asteroid> asteroids = new List<Asteroid>(FindObjectsOfType<Asteroid>());
-			
-			foreach (Asteroid asteroid in asteroids)
-				Destroy(asteroid.gameObject);	
-		}
-	}
+        private static void NewGame()
+        {
+            List<Asteroid> asteroids = new List<Asteroid>(FindObjectsOfType<Asteroid>());
+
+            foreach (Asteroid asteroid in asteroids)
+                Destroy(asteroid.gameObject);
+        }
+    }
 }

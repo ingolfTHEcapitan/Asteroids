@@ -13,7 +13,7 @@ namespace Asteroids
 		
 		private void Start()
 		{
-			GameEvents.OnNewGameStarted();
+			GameEvents.OnPlayerDied();
 			StartCoroutine(SpawnRoutine());
 		}
 

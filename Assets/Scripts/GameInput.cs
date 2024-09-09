@@ -33,10 +33,9 @@ namespace Asteroids
 			_shootInputAction.performed += (_) => GameEvents.OnPlayerShooted();
 		}
 		
-		void OnEnable() => GameEvents.PlayerDied += OnPlayerDied;
-		void OnDestroy() => GameEvents.PlayerDied -= OnPlayerDied;
+		void OnEnable() => GameEvents.PlayerTakeHit += OnPlayerTakeHit;
 		
-		private void OnPlayerDied()
+		private void OnPlayerTakeHit()
 		{
 			PlayerInput.SwitchCurrentActionMap("UI");
 		}

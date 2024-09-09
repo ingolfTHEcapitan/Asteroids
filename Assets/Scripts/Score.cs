@@ -14,7 +14,7 @@ namespace Asteroids
 		GameEvents.AsteroidExploded += IncreaseScore;
 	}
 	
-	void OnEnable() => GameEvents.NewGameStarted += OnNewGameStarted;
+	void OnEnable() => GameEvents.PlayerDied += ResetScore;
 	
 	
 	private void Start()
@@ -55,12 +55,6 @@ namespace Asteroids
 		ScoreText.color = color;
 		HighScoreText.color = color;
 	}
-	
-	private void OnNewGameStarted()
-	{
-		ResetScore();
-	}
-	
 	
 	public void ResetScore()
 	{

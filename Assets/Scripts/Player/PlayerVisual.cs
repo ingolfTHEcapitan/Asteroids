@@ -30,7 +30,7 @@ namespace Asteroids
 		{
 			if (Player.Instance.CurrentLives <=0)
 			{
-				GameInput.Instance.SpaceshipInputActions.Enable();
+				GameInput.PlayerInput.SwitchCurrentActionMap("Keyboard");
 				return;
 			}
 				
@@ -49,7 +49,7 @@ namespace Asteroids
 			_spriteRenderer.enabled = false;
 			yield return new WaitForSeconds(1);
 			_spriteRenderer.enabled = true;
-			GameInput.Instance.SpaceshipInputActions.Enable();
+			GameInput.PlayerInput.SwitchCurrentActionMap("Keyboard");
 			
 			float endTime = Time.time + blinkDuration;
 			while (Time.time < endTime)

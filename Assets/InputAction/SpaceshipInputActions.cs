@@ -52,7 +52,7 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [

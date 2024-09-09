@@ -7,9 +7,14 @@ namespace Asteroids
 	{
 		public static GameInput Instance { get; private set;}
 
-		public Vector2 MovementInput { get => SpaceshipInputActions.Keyboard.Move.ReadValue<Vector2>();}
-		public float RotationInput { get => SpaceshipInputActions.Keyboard.Rotation.ReadValue<float>();}
-		public SpaceshipInputActions SpaceshipInputActions { get; set;}
+		public static PlayerInput PlayerInput { get; set;}
+		private InputAction _moveInputAction;
+		private InputAction _rotationInputAction;
+		private InputAction _shootInputAction;
+		
+		public Vector2 MovementInput { get => _moveInputAction.ReadValue<Vector2>();}
+		public float RotationInput { get => _rotationInputAction.ReadValue<float>();}
+		public bool ShootInput { get => _shootInputAction.WasPressedThisFrame();}
 
 		void Awake()
 		{
@@ -18,10 +23,14 @@ namespace Asteroids
 			else
 				Instance = this;
 			
-			SpaceshipInputActions = new SpaceshipInputActions();
-			SpaceshipInputActions.Enable();	
+			PlayerInput = GetComponent<PlayerInput>();
 			
-			SpaceshipInputActions.Keyboard.Shoot.performed += (_) => GameEvents.OnPlayerShooted();
+			
+			_moveInputAction = PlayerInput.actions["Move"];
+			_rotationInputAction = PlayerInput.actions["Rotation"];
+			_shootInputAction = PlayerInput.actions["Shoot"];
+			
+			_shootInputAction.performed += (_) => GameEvents.OnPlayerShooted();
 		}
 		
 		void OnEnable() => GameEvents.PlayerDied += OnPlayerDied;
@@ -29,7 +38,7 @@ namespace Asteroids
 		
 		private void OnPlayerDied()
 		{
-			SpaceshipInputActions.Disable();
+			PlayerInput.SwitchCurrentActionMap("UI");
 		}
 	}
 }

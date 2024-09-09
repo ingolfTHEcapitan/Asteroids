@@ -28,6 +28,12 @@ namespace Asteroids
 		
 		private void OnPlayerDied()
 		{
+			if (Player.Instance.CurrentLives <=0)
+			{
+				GameInput.Instance.SpaceshipInputActions.Enable();
+				return;
+			}
+				
 			Player.Instance.gameObject.layer = LayerMask.NameToLayer("IgnoreAsteroidCollision");
 			_animator.SetTrigger("Die");
 		}

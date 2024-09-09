@@ -10,8 +10,10 @@ namespace Asteroids
 	{
 		[SerializeField] private int _maxLives = 3;
 		
+		
 		public static Player Instance { get; private set; }
 		public int CurrentLives {get; set;}
+		
 		void Awake()
 		{
 			if (Instance != null && Instance != this)
@@ -22,20 +24,18 @@ namespace Asteroids
 			CurrentLives = _maxLives;
 		}
 		
-		void OnEnable() => GameEvents.PlayerDied += OnPlayerDied;
-		void OnDestroy() => GameEvents.PlayerDied -= OnPlayerDied;
-		
-		private void OnPlayerDied()
+		public void Update()
 		{
-			CurrentLives -= 1;
-			
 			if(CurrentLives <= 0)
-				GameOver();
+				NewGame();
 		}
-		
-		public void GameOver()
+
+		private void NewGame()
 		{
-			SceneManager.LoadScene(0);
+			GameEvents.OnNewGameStarted();
+
+			CurrentLives = _maxLives;
+			transform.position = Vector3.zero;
 		}
 	}
 }

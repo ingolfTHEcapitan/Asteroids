@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asteroids
@@ -30,7 +31,10 @@ namespace Asteroids
 			_animator = GetComponent<Animator>();
 			_boxCollider2D = GetComponent<BoxCollider2D>();
 		}
-		
+
+		private void OnEnable() => GameEvents.NewGameStarted += OnNewGameStarted;
+
+
 		private void Start()
 		{
 			_spriteRenderer.sprite = _asteroids[Random.Range(0, _asteroids.Length)];
@@ -79,6 +83,14 @@ namespace Asteroids
 		public void DestroyAsteroid()
 		{
 			Destroy(gameObject);
+		}
+		
+		private void OnNewGameStarted()
+		{
+			List<Asteroid> asteroids = new List<Asteroid>(FindObjectsOfType<Asteroid>());
+			
+			foreach (Asteroid asteroid in asteroids)
+				Destroy(asteroid.gameObject);	
 		}
 	}
 }

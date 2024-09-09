@@ -11,8 +11,11 @@ namespace Asteroids
 
 	private void Awake()
 	{
-		GameEvents.AsteroidExplosion += IncreaseScore;
+		GameEvents.AsteroidExploded += IncreaseScore;
 	}
+	
+	void OnEnable() => GameEvents.NewGameStarted += OnNewGameStarted;
+	
 	
 	private void Start()
 	{
@@ -53,12 +56,18 @@ namespace Asteroids
 		HighScoreText.color = color;
 	}
 	
-	// public void ResetScore()
-	// {
-	// 	_scoreCount = 0;
-	// 	ScoreText.SetText($"{_scoreCount}");
-	// 	SetTextColor(Color.white);
-	// }
+	private void OnNewGameStarted()
+	{
+		ResetScore();
+	}
+	
+	
+	public void ResetScore()
+	{
+		_scoreCount = 0;
+		ScoreText.SetText($"Score: {_scoreCount}");
+		SetTextColor(Color.white);
+	}
 
 	// public void ResetHighScore()
 	// {

@@ -52,7 +52,6 @@ namespace Asteroids
 		
 		public IEnumerator BkinlingRoutine()
 		{
-			
 			Player.Instance.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
 			GameInput.PlayerInput.SwitchCurrentActionMap("Keyboard");
 			

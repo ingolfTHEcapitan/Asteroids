@@ -65,7 +65,7 @@ namespace Asteroids
 				
 				_isDestroyed = true;
 				_animator.Play("AsteroidExplosion");
-				GameEvents.OnAsteroidExplosion(this);
+				GameEvents.OnAsteroidExploded(this);
 			}
 		}
 		

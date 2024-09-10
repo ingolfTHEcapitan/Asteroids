@@ -17,6 +17,6 @@ namespace Asteroids
 		public static void OnPlayerTakeHit() => PlayerTakeHit?.Invoke();
 		public static void OnPlayerDied() => PlayerDied?.Invoke();
 		public static void OnExitTriggerFired(Collider2D collider) => ExitTriggerFired?.Invoke(collider);
-		public static void OnAsteroidExplosion(Asteroid asteroid) => AsteroidExploded?.Invoke(asteroid);
+		public static void OnAsteroidExploded(Asteroid asteroid) => AsteroidExploded?.Invoke(asteroid);
 	}
 }

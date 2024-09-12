@@ -1,0 +1,8 @@
+.button {
+    font-size: 60px;
+    -unity-text-align: upper-center;
+    margin-right: 140px;
+    position: relative;
+    margin-left: 140px;
+    margin-bottom: 40px;
+}

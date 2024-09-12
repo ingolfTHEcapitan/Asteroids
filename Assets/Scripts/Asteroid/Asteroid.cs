@@ -77,7 +77,7 @@ namespace Asteroids
 			Asteroid halfAsteroid = Instantiate(this, position, transform.rotation);
 			halfAsteroid.Size = Size * 0.5f;
 			
-			halfAsteroid.SetTrajectory(Random.insideUnitCircle.normalized);
+			halfAsteroid.SetTrajectory(Random.insideUnitCircle.normalized * _speed);
 		}	
 		
 		public void DestroyAsteroid()

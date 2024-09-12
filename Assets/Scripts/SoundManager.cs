@@ -33,7 +33,7 @@ namespace Asteroids
 		private void OnEnable()
 		{
 			GameEvents.AsteroidExploded += (_) => PlaySound(SoundType.Explosion);
-			GameEvents.PlayerShooted += () => PlaySound(SoundType.Laser, 0.6f);
+			GameEvents.PlayerShooted += () => PlaySound(SoundType.Laser, 0.4f);
 			GameEvents.PlayerDied += () => PlaySound(SoundType.Dead);
 			GameEvents.PlayerTakeHit += () => PlaySound(SoundType.Hurt);
 			
@@ -55,6 +55,7 @@ namespace Asteroids
 			
 			_audioSource.PlayOneShot(randomClip, volume);
 			_audioSource.volume = volume;
+			_audioSource.pitch = UnityEngine.Random.Range(0.7f, 1.3f);
 		}
 	}
 	

@@ -15,8 +15,9 @@ namespace Asteroids
 	public class SoundManager : MonoBehaviour
 	{
 		[SerializeField] private Sound[] _soundList;
+		[SerializeField] private AudioSource _musicSource;
 		
-		private AudioSource _audioSource;
+		private AudioSource _soundSource;
 		
 		public static SoundManager Instance { get; private set; }
 		
@@ -27,7 +28,8 @@ namespace Asteroids
 			else
 				Instance = this;
 				
-			_audioSource = GetComponent<AudioSource>();
+			_soundSource = GetComponent<AudioSource>();
+
 		}
 		
 		private void OnEnable()
@@ -53,9 +55,21 @@ namespace Asteroids
 			AudioClip[] clips = _soundList[(int)sound].AudioClips;
 			AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
 			
-			_audioSource.PlayOneShot(randomClip, volume);
-			_audioSource.volume = volume;
-			_audioSource.pitch = UnityEngine.Random.Range(0.7f, 1.3f);
+			_soundSource.PlayOneShot(randomClip, volume);
+			_soundSource.volume = volume;
+			_soundSource.pitch = UnityEngine.Random.Range(0.7f, 1.3f);
+		}
+		
+		public void PauseMusic()
+		{
+			_soundSource.mute = true;
+			_musicSource.mute = true;
+		}
+
+		public void UnPauseMusic()
+		{
+			_soundSource.mute = false;
+			_musicSource.mute = false;
 		}
 	}
 	

@@ -46,14 +46,16 @@ namespace Asteroids
 		
 		private void OnPlayerDied()
 		{
-			GameInput.PlayerInput.SwitchCurrentActionMap("Keyboard");
+			GameInput.Instance.SpaceshipInputActions.Keyboard.Enable();
+			GameInput.Instance.SpaceshipInputActions.UI.Disable();
 			Player.Instance.gameObject.layer = LayerMask.NameToLayer("Player");
 		}
 		
 		public IEnumerator BkinlingRoutine()
 		{
 			Player.Instance.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-			GameInput.PlayerInput.SwitchCurrentActionMap("Keyboard");
+			GameInput.Instance.SpaceshipInputActions.Keyboard.Enable();
+			GameInput.Instance.SpaceshipInputActions.UI.Disable();
 			
 			float endTime = Time.time + blinkDuration;
 			while (Time.time < endTime)

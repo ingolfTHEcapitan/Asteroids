@@ -53,6 +53,15 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""f46c211b-faf3-41df-94b0-5ff4a6a43f86"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -119,6 +128,17 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80200bd9-5739-4c27-a5a9-48716aae94d1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -214,6 +234,15 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
                     ""type"": ""PassThrough"",
                     ""id"": ""62d15a60-1637-4ae8-b498-5201ff2861bd"",
                     ""expectedControlType"": ""Quaternion"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c0f9eeb-ca52-45a6-90ba-3ed0ef2a99be"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -637,6 +666,17 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
                     ""action"": ""TrackedDeviceOrientation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""258123a5-5478-44c9-b68e-c113b42117f7"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -648,6 +688,7 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
         m_Keyboard_Move = m_Keyboard.FindAction("Move", throwIfNotFound: true);
         m_Keyboard_Rotation = m_Keyboard.FindAction("Rotation", throwIfNotFound: true);
         m_Keyboard_Shoot = m_Keyboard.FindAction("Shoot", throwIfNotFound: true);
+        m_Keyboard_Pause = m_Keyboard.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -660,6 +701,7 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -724,6 +766,7 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
     private readonly InputAction m_Keyboard_Move;
     private readonly InputAction m_Keyboard_Rotation;
     private readonly InputAction m_Keyboard_Shoot;
+    private readonly InputAction m_Keyboard_Pause;
     public struct KeyboardActions
     {
         private @SpaceshipInputActions m_Wrapper;
@@ -731,6 +774,7 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
         public InputAction @Move => m_Wrapper.m_Keyboard_Move;
         public InputAction @Rotation => m_Wrapper.m_Keyboard_Rotation;
         public InputAction @Shoot => m_Wrapper.m_Keyboard_Shoot;
+        public InputAction @Pause => m_Wrapper.m_Keyboard_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -749,6 +793,9 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IKeyboardActions instance)
@@ -762,6 +809,9 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IKeyboardActions instance)
@@ -793,6 +843,7 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
     private readonly InputAction m_UI_RightClick;
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
+    private readonly InputAction m_UI_Pause;
     public struct UIActions
     {
         private @SpaceshipInputActions m_Wrapper;
@@ -807,6 +858,7 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
         public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
         public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+        public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -846,6 +898,9 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
             @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -880,6 +935,9 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
             @TrackedDeviceOrientation.started -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled -= instance.OnTrackedDeviceOrientation;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -902,6 +960,7 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
         void OnMove(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -915,5 +974,6 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

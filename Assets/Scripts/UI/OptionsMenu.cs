@@ -14,7 +14,7 @@ namespace Asteroids
 		void OnDisable()
 		{
 			gameObject.SetActive(false);
-			GameInput.Instance.SpaceshipInputActions.Enable();
+			GameInput.Instance.SpaceshipInputActions.UI.Enable();
 		}
 	}
 }

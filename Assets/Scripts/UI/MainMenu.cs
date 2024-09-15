@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asteroids
@@ -7,7 +5,7 @@ namespace Asteroids
 	public class MainMenu : Menu
 	{
 		[SerializeField] private GameObject _pauseMenu;
-
+		
 		public override void UnPause()
 		{
 			base.UnPause();
@@ -17,11 +15,6 @@ namespace Asteroids
 		public void Exit()
 		{
 			Application.Quit();
-		}
-		
-		void OnDisable()
-		{
-			GameInput.Instance.SpaceshipInputActions.Keyboard.Pause.performed -= (_) => _pauseMenu.SetActive(true);
 		}
 	}
 }

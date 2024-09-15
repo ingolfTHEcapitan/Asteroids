@@ -8,7 +8,7 @@ namespace Asteroids
 {
 	public abstract class Menu : MonoBehaviour
 	{
-		private void OnEnable()
+		public void OnEnable()
 		{
 			Time.timeScale = 0;
 		}
@@ -22,8 +22,11 @@ namespace Asteroids
 		{
 			Time.timeScale = 0;
 			SoundManager.Instance.PauseMusic();
-			GameInput.Instance.SpaceshipInputActions.Keyboard.Disable();
 			GameInput.Instance.SpaceshipInputActions.UI.Enable();
+			GameInput.Instance.SpaceshipInputActions.Keyboard.Disable();
+			GameInput.Instance.SpaceshipInputActions.Keyboard.Shoot.performed -= (_) => GameEvents.OnPlayerShooted();
+			GameInput.Instance.SpaceshipInputActions.Keyboard.Pause.performed -= (_) => Pause();
+			GameInput.Instance.SpaceshipInputActions.UI.Pause.performed += (_) => UnPause();
 		}
 		
 		public virtual void UnPause()
@@ -32,6 +35,10 @@ namespace Asteroids
 			SoundManager.Instance.UnPauseMusic();
 			GameInput.Instance.SpaceshipInputActions.Keyboard.Enable();
 			GameInput.Instance.SpaceshipInputActions.UI.Disable();
+			GameInput.Instance.SpaceshipInputActions.Keyboard.Shoot.performed += (_) => GameEvents.OnPlayerShooted();
+			GameInput.Instance.SpaceshipInputActions.Keyboard.Pause.performed += (_) => Pause();
+			GameInput.Instance.SpaceshipInputActions.UI.Pause.performed -= (_) => UnPause();
+			
 		}
 	}
 }

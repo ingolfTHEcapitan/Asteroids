@@ -11,7 +11,6 @@ namespace Asteroids
 		public override void UnPause()
 		{
 			base.UnPause();
-			GameInput.Instance.SpaceshipInputActions.Keyboard.Shoot.performed += (_) => GameEvents.OnPlayerShooted();
 			GameInput.Instance.SpaceshipInputActions.Keyboard.Pause.performed += (_) => _pauseMenu.SetActive(true);
 		}
 		
@@ -20,6 +19,9 @@ namespace Asteroids
 			Application.Quit();
 		}
 		
-
+		void OnDisable()
+		{
+			GameInput.Instance.SpaceshipInputActions.Keyboard.Pause.performed -= (_) => _pauseMenu.SetActive(true);
+		}
 	}
 }

@@ -6,18 +6,25 @@ namespace Asteroids
 {
 	public class PauseMenu : Menu
 	{
-		void OnEnable()
+		new void OnEnable()
 		{
-			GameInput.Instance.SpaceshipInputActions.UI.Pause.performed += (_) => gameObject.SetActive(false);
-
+			base.OnEnable();
+			GameInput.Instance.SpaceshipInputActions.Keyboard.Pause.performed -= (_) => gameObject.SetActive(true);
+			GameInput.Instance.SpaceshipInputActions.UI.Pause.performed += (_) => gameObject.SetActive(true);
 		}
-		
-		
+
+
 		public override void UnPause()
 		{
 			base.UnPause();
-			
-			
+			gameObject.SetActive(false);
 		}
+
+		void OnDisable()
+		{
+			GameInput.Instance.SpaceshipInputActions.Keyboard.Pause.performed += (_) => gameObject.SetActive(true);
+			GameInput.Instance.SpaceshipInputActions.UI.Pause.performed -= (_) => gameObject.SetActive(true);
+		}
+
 	}
 }

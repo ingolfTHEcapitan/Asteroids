@@ -2578,7 +2578,7 @@ GameObject:
   - component: {fileID: 565564619}
   - component: {fileID: 565564618}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: Effects Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2703,6 +2703,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 565564616}
   m_CullTransparentMesh: 1
+--- !u!1 &568812295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 568812297}
+  - component: {fileID: 568812296}
+  m_Layer: 0
+  m_Name: AudioMixer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &568812296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568812295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90e195b96a5b714f8f21393a4968c83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioMixer: {fileID: 24100000, guid: 28da74d91b452c5498a34f3ccfe78642, type: 2}
+  _masterSlider: {fileID: 970172349}
+  _effectsSlider: {fileID: 823360901}
+  _musicSlider: {fileID: 918161774}
+  _uiSlider: {fileID: 904762662}
+--- !u!4 &568812297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568812295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 548.1507, y: 292.9229, z: -3.3854067}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &571040105
 GameObject:
   m_ObjectHideFlags: 0
@@ -3003,7 +3052,7 @@ GameObject:
   - component: {fileID: 603152653}
   - component: {fileID: 603152652}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Music Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3591,7 +3640,7 @@ GameObject:
   - component: {fileID: 823360900}
   - component: {fileID: 823360901}
   m_Layer: 5
-  m_Name: Slider (1)
+  m_Name: Music Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3664,13 +3713,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 300965972}
   m_HandleRect: {fileID: 2029745113}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.31
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 568812296}
+        m_TargetAssemblyTypeName: Asteroids.AudioMixerControler, Assembly-CSharp
+        m_MethodName: OnMusicVolumeChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &859849623
 GameObject:
   m_ObjectHideFlags: 0
@@ -4068,7 +4129,7 @@ GameObject:
   - component: {fileID: 904762661}
   - component: {fileID: 904762662}
   m_Layer: 5
-  m_Name: Slider (2)
+  m_Name: UI Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4141,13 +4202,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 1090821200}
   m_HandleRect: {fileID: 1755116163}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.31
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 568812296}
+        m_TargetAssemblyTypeName: Asteroids.AudioMixerControler, Assembly-CSharp
+        m_MethodName: OnUIVolumeChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &907100545
 GameObject:
   m_ObjectHideFlags: 0
@@ -4236,7 +4309,7 @@ GameObject:
   - component: {fileID: 913839883}
   - component: {fileID: 913839882}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Master Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4372,7 +4445,7 @@ GameObject:
   - component: {fileID: 918161773}
   - component: {fileID: 918161774}
   m_Layer: 5
-  m_Name: Slider (1)
+  m_Name: Effects Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4445,13 +4518,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 486626081}
   m_HandleRect: {fileID: 1616859042}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.31
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 568812296}
+        m_TargetAssemblyTypeName: Asteroids.AudioMixerControler, Assembly-CSharp
+        m_MethodName: OnEffectsVolumeChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &965560172
 GameObject:
   m_ObjectHideFlags: 0
@@ -4584,7 +4669,7 @@ GameObject:
   - component: {fileID: 970172348}
   - component: {fileID: 970172349}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Master Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4657,13 +4742,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 1503927478}
   m_HandleRect: {fileID: 907100546}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.31
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 568812296}
+        m_TargetAssemblyTypeName: Asteroids.AudioMixerControler, Assembly-CSharp
+        m_MethodName: OnMasterVolumeChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1009109318
 GameObject:
   m_ObjectHideFlags: 0
@@ -5386,7 +5483,7 @@ GameObject:
   - component: {fileID: 1357807925}
   - component: {fileID: 1357807924}
   m_Layer: 5
-  m_Name: Text (TMP) (4)
+  m_Name: UI Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6025,7 +6122,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 8701953192631854005, guid: 28da74d91b452c5498a34f3ccfe78642, type: 2}
   m_audioClip: {fileID: 8300000, guid: dc90a2472c7de6344822323413399269, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6373,7 +6470,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 8830942303591058931, guid: 28da74d91b452c5498a34f3ccfe78642, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

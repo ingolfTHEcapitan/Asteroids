@@ -20,8 +20,9 @@ namespace Asteroids
 		private AudioSource _soundSource;
 		
 		public static SoundManager Instance { get; private set; }
-		
-		private void Awake()
+        public AudioSource MusicSource { get => _musicSource; private set => _musicSource = value; }
+
+        private void Awake()
 		{
 			if (Instance != null && Instance != this)
 				Destroy(Instance);
@@ -36,8 +37,12 @@ namespace Asteroids
 		{
 			GameEvents.AsteroidExploded += (_) => PlaySound(SoundType.Explosion);
 			GameEvents.PlayerShooted += () => PlaySound(SoundType.Laser, 0.4f);
-			GameEvents.PlayerDied += () => PlaySound(SoundType.Dead);
 			GameEvents.PlayerTakeHit += () => PlaySound(SoundType.Hurt);
+			GameEvents.PlayerDied += () =>
+			{
+				PlaySound(SoundType.Dead);
+				MusicSource.Play();
+			};
 			
 			#if UNITY_EDITOR
 			
@@ -57,19 +62,13 @@ namespace Asteroids
 			
 			_soundSource.PlayOneShot(randomClip, volume);
 			_soundSource.volume = volume;
-			_soundSource.pitch = UnityEngine.Random.Range(0.7f, 1.3f);
+			_soundSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
 		}
 		
-		public void PauseMusic()
+		public void AudioMute(bool isActive)
 		{
-			_soundSource.mute = true;
-			_musicSource.mute = true;
-		}
-
-		public void UnPauseMusic()
-		{
-			_soundSource.mute = false;
-			_musicSource.mute = false;
+			_soundSource.mute = isActive;
+			MusicSource.mute = isActive;
 		}
 	}
 	

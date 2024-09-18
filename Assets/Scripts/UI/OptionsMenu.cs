@@ -7,7 +7,7 @@ namespace Asteroids
 		new void OnEnable()
 		{
 			Time.timeScale = 0;
-			SoundManager.Instance.PauseMusic();
+			SoundManager.Instance.AudioMute(true);
 			GameInput.Instance.SpaceshipInputActions.Disable();
 		}
 

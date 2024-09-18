@@ -11,13 +11,13 @@ namespace Asteroids
 		
 		private void Start()
 		{
-			SoundManager.Instance.PauseMusic();
+			SoundManager.Instance.AudioMute(true);
 		}
 
 		public virtual void Pause()
 		{
 			Time.timeScale = 0;
-			SoundManager.Instance.PauseMusic();
+			SoundManager.Instance.AudioMute(true);
 			GameInput.Instance.SpaceshipInputActions.UI.Enable();
 			GameInput.Instance.SpaceshipInputActions.Keyboard.Disable();
 			GameInput.Instance.SpaceshipInputActions.Keyboard.Shoot.performed -= (_) => GameEvents.OnPlayerShooted();
@@ -27,7 +27,7 @@ namespace Asteroids
 		public virtual void UnPause()
 		{
 			Time.timeScale = 1;
-			SoundManager.Instance.UnPauseMusic();
+			SoundManager.Instance.AudioMute(false);
 			GameInput.Instance.SpaceshipInputActions.Keyboard.Enable();
 			GameInput.Instance.SpaceshipInputActions.UI.Disable();
 			GameInput.Instance.SpaceshipInputActions.Keyboard.Shoot.performed += (_) => GameEvents.OnPlayerShooted();

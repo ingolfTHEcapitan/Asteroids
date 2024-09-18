@@ -10,6 +10,7 @@ namespace Asteroids
 		{
 			base.UnPause();
 			GameInput.Instance.SpaceshipInputActions.Keyboard.Pause.performed += (_) => _pauseMenu.SetActive(true);
+			SoundManager.Instance.MusicSource.Play();
 		}
 		
 		public void Exit()

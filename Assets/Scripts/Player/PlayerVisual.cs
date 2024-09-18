@@ -20,7 +20,7 @@ namespace Asteroids
 
 		void OnEnable()
 		{
-			GameEvents.PlayerRespawned += OnPlayerRespawned;
+			GameEvents.PlayerRespawned += (_) => OnPlayerRespawned();
 			GameEvents.PlayerDied += OnPlayerDied;
 		}
 
@@ -38,7 +38,7 @@ namespace Asteroids
 		// Проверка под конец анимации взрыва
 		public void OnPlayerExplosion()
 		{
-			if (Player.Instance.CurrentLives <= 0)
+			if (Player.Instance.CurrentHealth <= 0)
 				GameEvents.OnPlayerDied();
 			else
 				StartCoroutine(BkinlingRoutine());

@@ -8,19 +8,20 @@ namespace Asteroids
 {
 	public class Player : MonoBehaviour, IScreenWrappable
 	{
-		[SerializeField] private int _maxLives = 3;
+		[SerializeField] private int _maxHealth = 3;
 		
 		public static Player Instance { get; private set; }
-		public int CurrentLives {get; private set;}
-		
-		void Awake()
+		public int CurrentHealth {get; private set;}
+        public int MaxHealth { get => _maxHealth;}
+
+        void Awake()
 		{
 			if (Instance != null && Instance != this)
 				Destroy(Instance);
 			else
 				Instance = this;
 			
-			CurrentLives = _maxLives;
+			CurrentHealth = MaxHealth;
 		}
 
 		private void OnEnable()
@@ -31,13 +32,13 @@ namespace Asteroids
 
 		private void OnPlayerTakeHit()
 		{
-			CurrentLives--;
-			GameEvents.OnPlayerRespawned();
+			CurrentHealth--;
+			GameEvents.OnPlayerRespawned(CurrentHealth);
 		}
 		
 		private void OnPlayerDied()
 		{
-			CurrentLives = _maxLives;
+			CurrentHealth = MaxHealth;
 			transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
 		}
 	}

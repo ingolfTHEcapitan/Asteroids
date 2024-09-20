@@ -16,7 +16,7 @@ namespace Asteroids
 		private SpriteRenderer _spriteRenderer;
 		private Rigidbody2D _rigidbody2D;
 		private Animator _animator;
-		private BoxCollider2D _boxCollider2D;
+		private PolygonCollider2D _polygonCollider2D;
 		private float _size = 1.0f;
 		private bool _isDestroyed = false;
 
@@ -29,19 +29,29 @@ namespace Asteroids
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_rigidbody2D = GetComponent<Rigidbody2D>();
 			_animator = GetComponent<Animator>();
-			_boxCollider2D = GetComponent<BoxCollider2D>();
+			_polygonCollider2D = GetComponent<PolygonCollider2D>();
+			
+			// Отключаем аниматор что бы не перезаписать спрайты астеройда пока нам не понадобится анимация
+			_animator.enabled = false;
 		}
 
 		private void OnEnable() => GameEvents.PlayerDied += NewGame;
 
-
 		private void Start()
 		{
 			_spriteRenderer.sprite = _asteroids[Random.Range(0, _asteroids.Length)];
+			UpdateColliderShape();
 			
 			transform.eulerAngles = new Vector3(0, 0, Random.value * 360.0f);
 			transform.localScale = Vector3.one * Size;
 			_rigidbody2D.mass = Size;
+		}
+		
+		public void UpdateColliderShape()
+		{
+			List<Vector2> physicsShape = new List<Vector2>();
+			_spriteRenderer.sprite.GetPhysicsShape(0, physicsShape);  // Получаем первую форму (если их несколько)
+			_polygonCollider2D.SetPath(0, physicsShape);  // Применяем форму к коллайдеру
 		}
 		
 		public void SetTrajectory(Vector3 direction)
@@ -61,9 +71,11 @@ namespace Asteroids
 				}
 				
 				// Переключаем коладер в редим тригера что бы избежать столкновений
-				_boxCollider2D.isTrigger = true;
+				_polygonCollider2D.isTrigger = true;
 				
 				_isDestroyed = true;
+				// Включаем аниматор что бы проиграть анимацию взрыва
+				_animator.enabled = true;
 				_animator.Play("AsteroidExplosion");
 				GameEvents.OnAsteroidExploded(this);
 			}
@@ -85,12 +97,12 @@ namespace Asteroids
 			Destroy(gameObject);
 		}
 		
-        private static void NewGame()
-        {
-            List<Asteroid> asteroids = new List<Asteroid>(FindObjectsOfType<Asteroid>());
+		private static void NewGame()
+		{
+			List<Asteroid> asteroids = new List<Asteroid>(FindObjectsOfType<Asteroid>());
 
-            foreach (Asteroid asteroid in asteroids)
-                Destroy(asteroid.gameObject);
-        }
-    }
+			foreach (Asteroid asteroid in asteroids)
+				Destroy(asteroid.gameObject);
+		}
+	}
 }

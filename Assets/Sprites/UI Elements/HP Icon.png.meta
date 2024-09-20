@@ -105,43 +105,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Full Heart
+      name: Empty Heart
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 10
+        width: 9
         height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d6d26893cdb0334aab901272ac30db0
-      internalID: -1279482600
+      spriteID: e56841008a88eeb4d8374ab6f4b75411
+      internalID: -1400445313
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Empty Heart
+      name: Full Heart
       rect:
         serializedVersion: 2
         x: 12
         y: 0
-        width: 10
+        width: 9
         height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 322936ee2a1437644926424fec444503
-      internalID: -1400445313
+      spriteID: 7e157d6dd87949446a1733a1191cb8b2
+      internalID: -1279482600
       vertices: []
       indices: 
       edges: []

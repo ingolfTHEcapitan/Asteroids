@@ -29,12 +29,12 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""cae1425c-c5b1-4e01-a6b0-0aef86d904a5"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Rotation"",
@@ -66,9 +66,9 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
             ],
             ""bindings"": [
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""1D Axis"",
                     ""id"": ""a2f7af10-fc97-4683-878f-8258e26f92df"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""1DAxis(minValue=-0.011,maxValue=0.011)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -77,7 +77,7 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
+                    ""name"": ""positive"",
                     ""id"": ""43d7aaf3-e879-4114-8eff-f43dcf531bf6"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",

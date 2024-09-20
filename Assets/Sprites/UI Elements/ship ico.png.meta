@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f618f4d31be9422458b32d7e58feb27c
+guid: 0dc8f1225b272ef459189d9d43f403ed
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,12 +42,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,43 +105,75 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: boolet_0
+      name: ship_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
-        width: 16
-        height: 16
+        y: 0
+        width: 48
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
+      physicsShape:
+      - - {x: 16, y: -13}
+        - {x: 9, y: 3}
+        - {x: 6, y: 3}
+        - {x: 6, y: 7}
+        - {x: 1, y: 16}
+        - {x: -2, y: 16}
+        - {x: -7, y: 7}
+        - {x: -7, y: 3}
+        - {x: -10, y: 3}
+        - {x: -17, y: -13}
+        - {x: -17, y: -13}
+      tessellationDetail: 1
       bones: []
-      spriteID: e02bb3fc238a6cc44a6ee7da9f40c82a
-      internalID: -534097623
+      spriteID: 434c51c18c1ad224ab41fb61bae31e22
+      internalID: 1381458341
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boolet_1
+      name: ship_1
       rect:
         serializedVersion: 2
-        x: 0
+        x: 48
         y: 0
-        width: 16
-        height: 16
+        width: 48
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa3737952e78e904a9ee711a164bd591
-      internalID: 1213316426
+      spriteID: fe783e57090c161468268cf9415b548d
+      internalID: -1875343415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ship_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5e56cd7376044f4793b156fa7976561
+      internalID: -1289272811
       vertices: []
       indices: 
       edges: []
@@ -157,8 +189,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      boolet_0: -534097623
-      boolet_1: 1213316426
+      ship_0: 1381458341
+      ship_1: -1875343415
+      ship_2: -1289272811
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

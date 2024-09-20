@@ -9,7 +9,7 @@ namespace Asteroids
 		[SerializeField] private float _turnSpeed;
 
 		private Rigidbody2D _rigidbody;
-		private Vector2 _inputMoving;
+		private float _inputMoving;
 		private float _inputRotation;
 		
 		void Awake()
@@ -25,7 +25,7 @@ namespace Asteroids
 		
 		void FixedUpdate()
 		{
-			if (_inputMoving.magnitude != 0.0f)
+			if (_inputMoving != 0.0f)
 			{
 				_rigidbody.AddForce(transform.up * _trustSpeed);
 			}

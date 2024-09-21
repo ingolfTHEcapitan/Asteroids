@@ -31,23 +31,9 @@ namespace Asteroids
 		
 		private void OnPlayerRespawned()
 		{
-			SetLayerRecursively(Player.Instance.gameObject, LayerMask.NameToLayer("IgnoreAsteroidCollision"));
+			Player.Instance.gameObject.layer = LayerMask.NameToLayer("IgnoreAsteroidCollision");
 			_animator.SetTrigger("Explosion");
 		}
-		
-		void SetLayerRecursively(GameObject obj, int newLayer)
-		{
-			if (obj == null)
-				return;
-
-			obj.layer = newLayer;
-
-			foreach (Transform child in obj.transform)
-			{
-				SetLayerRecursively(child.gameObject, newLayer);
-			}
-		}
-		
 		
 		// ѕроверка под конец анимации взрыва
 		public void OnPlayerExplosion()
@@ -62,7 +48,7 @@ namespace Asteroids
 		{
 			GameInput.Instance.SpaceshipInputActions.Keyboard.Enable();
 			GameInput.Instance.SpaceshipInputActions.UI.Disable();
-			SetLayerRecursively(Player.Instance.gameObject, LayerMask.NameToLayer("Player"));
+			Player.Instance.gameObject.layer =  LayerMask.NameToLayer("Player");
 		}
 		
 		public IEnumerator BkinlingRoutine()
@@ -83,7 +69,7 @@ namespace Asteroids
 
 			// ”бедимс€, что спрайт видим по окончании мигани€
 			_spriteRenderer.enabled = true;
-			SetLayerRecursively(Player.Instance.gameObject, LayerMask.NameToLayer("Player"));
+			Player.Instance.gameObject.layer =  LayerMask.NameToLayer("Player");
 		}
 	}
 }

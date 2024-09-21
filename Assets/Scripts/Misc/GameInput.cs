@@ -7,7 +7,7 @@ namespace Asteroids
 	{
 		public static GameInput Instance { get; private set;}
 
-		public float MovementInput { get => SpaceshipInputActions.Keyboard.Move.ReadValue<float>();}
+		public Vector2 MovementInput { get => SpaceshipInputActions.Keyboard.Move.ReadValue<Vector2>();}
 		public float RotationInput { get => SpaceshipInputActions.Keyboard.Rotation.ReadValue<float>();}
 		public SpaceshipInputActions SpaceshipInputActions { get; set;}
 

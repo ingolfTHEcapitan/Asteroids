@@ -26,7 +26,7 @@ namespace Asteroids
 
 		void Update()
 		{
-			_animator.SetFloat("Speed", GameInput.Instance.MovementInput);
+			_animator.SetFloat("Speed", GameInput.Instance.MovementInput.magnitude);
 		}
 		
 		private void OnPlayerRespawned()

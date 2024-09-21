@@ -29,12 +29,12 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""cae1425c-c5b1-4e01-a6b0-0aef86d904a5"",
-                    ""expectedControlType"": ""Axis"",
+                    ""type"": ""Value"",
+                    ""id"": ""4f0983c3-0ea9-4f13-9087-ac50c165671e"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Rotation"",
@@ -65,28 +65,6 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""a2f7af10-fc97-4683-878f-8258e26f92df"",
-                    ""path"": ""1DAxis(minValue=-0.011,maxValue=0.011)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""43d7aaf3-e879-4114-8eff-f43dcf531bf6"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
                 {
                     ""name"": ""1D Axis"",
                     ""id"": ""e859f5d5-b6f0-4364-88f1-1c79b5c1ec0a"",
@@ -141,6 +119,28 @@ public partial class @SpaceshipInputActions: IInputActionCollection2, IDisposabl
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""7dd250bc-67dd-4e31-8d2d-a38e6171e90f"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c78427d4-87e1-4fa0-86f0-39ed47a38785"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },

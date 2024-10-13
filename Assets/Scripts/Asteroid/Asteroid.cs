@@ -23,8 +23,9 @@ namespace Asteroids
 		public float Size { get => _size; set => _size = value; }
 		public float MaxSize { get => _maxSize; private set => _maxSize = value; }
 		public float MinSize { get => _minSize; private set => _minSize = value; }
+        public float Speed { get => _speed; private set => _speed = value; }
 
-		void Awake()
+        void Awake()
 		{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_rigidbody2D = GetComponent<Rigidbody2D>();
@@ -56,18 +57,16 @@ namespace Asteroids
 		
 		public void SetTrajectory(Vector3 direction)
 		{
-			_rigidbody2D.AddForce(direction * _speed);
+			_rigidbody2D.AddForce(direction * Speed);
 		}
 
 		void OnCollisionEnter2D(Collision2D collision)
 		{
-
 			if (!_isDestroyed && collision.gameObject.GetComponent<Laser>() != null)
 			{
 				if ((Size * 0.5) >= _minSize)
 				{
-					SplitAsteroid();
-					SplitAsteroid();
+					GameEvents.OnAsteroidSplitted(this);
 				}
 				
 				// Переключаем коладер в редим тригера что бы избежать столкновений
@@ -80,17 +79,6 @@ namespace Asteroids
 				GameEvents.OnAsteroidExploded(this);
 			}
 		}
-		
-		private void SplitAsteroid()
-		{
-			Vector2 position = transform.position;
-			position += Random.insideUnitCircle * 0.5f;
-			
-			Asteroid halfAsteroid = Instantiate(this, position, transform.rotation);
-			halfAsteroid.Size = Size * 0.5f;
-			
-			halfAsteroid.SetTrajectory(Random.insideUnitCircle.normalized * _speed);
-		}	
 		
 		public void DestroyAsteroid()
 		{

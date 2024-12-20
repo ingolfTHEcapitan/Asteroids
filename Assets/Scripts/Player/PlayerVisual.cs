@@ -6,8 +6,8 @@ namespace Asteroids
 	[RequireComponent(typeof(Animator))]
 	public class PlayerVisual : MonoBehaviour
 	{
-		[SerializeField] private float blinkInterval = 0.25f; // Интервал мигания в секундах
-		[SerializeField] private float blinkDuration = 3f;   // Продолжительность мигания в секундах
+		[SerializeField] private float blinkInterval = 0.25f; // РРЅС‚РµСЂРІР°Р» РјРёРіР°РЅРёСЏ РІ СЃРµРєСѓРЅРґР°С…
+		[SerializeField] private float blinkDuration = 3f;   // РџСЂРѕРґРѕР»Р¶РёС‚РµР»СЊРЅРѕСЃС‚СЊ РјРёРіР°РЅРёСЏ РІ СЃРµРєСѓРЅРґР°С…
 
 		private Animator _animator;
 		private SpriteRenderer _spriteRenderer;
@@ -35,7 +35,7 @@ namespace Asteroids
 			_animator.SetTrigger("Explosion");
 		}
 		
-		// Проверка под конец анимации взрыва
+		// РџСЂРѕРІРµСЂРєР° РїРѕРґ РєРѕРЅРµС† Р°РЅРёРјР°С†РёРё РІР·СЂС‹РІР°
 		public void OnPlayerExplosion()
 		{
 			if (Player.Instance.CurrentHealth <= 0)
@@ -60,14 +60,14 @@ namespace Asteroids
 			float endTime = Time.time + blinkDuration;
 			while (Time.time < endTime)
 			{
-				// Переключаем видимость спрайта
+				// РџРµСЂРµРєР»СЋС‡Р°РµРј РІРёРґРёРјРѕСЃС‚СЊ СЃРїСЂР°Р№С‚Р°
 				_spriteRenderer.enabled = !_spriteRenderer.enabled;
 
-				// Ждем указанный интервал
+				// Р–РґРµРј СѓРєР°Р·Р°РЅРЅС‹Р№ РёРЅС‚РµСЂРІР°Р»
 				yield return new WaitForSeconds(blinkInterval);
 			}
 
-			// Убедимся, что спрайт видим по окончании мигания
+			// РЈР±РµРґРёРјСЃСЏ, С‡С‚Рѕ СЃРїСЂР°Р№С‚ РІРёРґРёРј РїРѕ РѕРєРѕРЅС‡Р°РЅРёРё РјРёРіР°РЅРёСЏ
 			_spriteRenderer.enabled = true;
 			Player.Instance.gameObject.layer =  LayerMask.NameToLayer("Player");
 		}

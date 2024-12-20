@@ -23,9 +23,9 @@ namespace Asteroids
 
 		private void UpdateBoundsSize()
 		{
-			// orthographicSize равен половине высоты камеры, умножением на два получается высота камеры
+			// orthographicSize СЂР°РІРµРЅ РїРѕР»РѕРІРёРЅРµ РІС‹СЃРѕС‚С‹ РєР°РјРµСЂС‹, СѓРјРЅРѕР¶РµРЅРёРµРј РЅР° РґРІР° РїРѕР»СѓС‡Р°РµС‚СЃСЏ РІС‹СЃРѕС‚Р° РєР°РјРµСЂС‹
 			float ySize = _mainCamera.orthographicSize * 2;
-			// Ширина камеры равна высоте камеры умноженое на соотношение сторон
+			// РЁРёСЂРёРЅР° РєР°РјРµСЂС‹ СЂР°РІРЅР° РІС‹СЃРѕС‚Рµ РєР°РјРµСЂС‹ СѓРјРЅРѕР¶РµРЅРѕРµ РЅР° СЃРѕРѕС‚РЅРѕС€РµРЅРёРµ СЃС‚РѕСЂРѕРЅ
 			Vector2 boxColiderSize = new Vector2(ySize * _mainCamera.aspect, ySize);
 			_boxCollider2D.size = boxColiderSize;
 		}

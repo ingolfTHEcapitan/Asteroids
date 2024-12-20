@@ -37,20 +37,20 @@ namespace Asteroids
 				{
 					for (int i = 0; i < _spawnAmount; i++)
 					{
-						// Ñïàâíèì àñòåðîéäû âíóòðè íîðìàëèçîâàíîãî êðóãà, ÷òî áû îíè ïîÿâëÿëèñü íà êðàþ
-						// Íà íåêîòîðîì ðàñòîÿíèèè îò òî÷êè ñïàâíà.
+						// Ð¡Ð¿Ð°Ð²Ð½Ð¸Ð¼ Ð°ÑÑ‚ÐµÑ€Ð¾Ð¹Ð´Ñ‹ Ð²Ð½ÑƒÑ‚Ñ€Ð¸ Ð½Ð¾Ñ€Ð¼Ð°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½Ð¾Ð³Ð¾ ÐºÑ€ÑƒÐ³Ð°, Ñ‡Ñ‚Ð¾ Ð±Ñ‹ Ð¾Ð½Ð¸ Ð¿Ð¾ÑÐ²Ð»ÑÐ»Ð¸ÑÑŒ Ð½Ð° ÐºÑ€Ð°ÑŽ
+						// ÐÐ° Ð½ÐµÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¼ Ñ€Ð°ÑÑ‚Ð¾ÑÐ½Ð¸Ð¸Ð¸ Ð¾Ñ‚ Ñ‚Ð¾Ñ‡ÐºÐ¸ ÑÐ¿Ð°Ð²Ð½Ð°.
 						Vector3 spawnDirection = Random.insideUnitCircle.normalized * _spawnDistanse;
 						Vector3 spawnPoint = transform.position + spawnDirection;
 						
-						// Äëÿ êàæäîãî àñòåðîéäà âûáèðàåì ñëó÷àéíûé óãîë íà ãîòîðûé îí îòêëàíèòñÿ ïðè ñïàóíå
+						// Ð”Ð»Ñ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ Ð°ÑÑ‚ÐµÑ€Ð¾Ð¹Ð´Ð° Ð²Ñ‹Ð±Ð¸Ñ€Ð°ÐµÐ¼ ÑÐ»ÑƒÑ‡Ð°Ð¹Ð½Ñ‹Ð¹ ÑƒÐ³Ð¾Ð» Ð½Ð° Ð³Ð¾Ñ‚Ð¾Ñ€Ñ‹Ð¹ Ð¾Ð½ Ð¾Ñ‚ÐºÐ»Ð°Ð½Ð¸Ñ‚ÑÑ Ð¿Ñ€Ð¸ ÑÐ¿Ð°ÑƒÐ½Ðµ
 						float variance = Random.Range(-_trajectoryVariance, _trajectoryVariance);
-						// Ñîçäàåì âðàùåíèå ñ çàäàíûì óãëîì è îñüþ âîêðóã êîòîðîé áóäåò ïðîèñõîäèòü âðàùåíèå
+						// Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ð²Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ðµ Ñ Ð·Ð°Ð´Ð°Ð½Ñ‹Ð¼ ÑƒÐ³Ð»Ð¾Ð¼ Ð¸ Ð¾ÑÑŒÑŽ Ð²Ð¾ÐºÑ€ÑƒÐ³ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¹ Ð±ÑƒÐ´ÐµÑ‚ Ð¿Ñ€Ð¾Ð¸ÑÑ…Ð¾Ð´Ð¸Ñ‚ÑŒ Ð²Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ðµ
 						Quaternion rotation = Quaternion.AngleAxis(variance, Vector3.forward);
 						
 						Asteroid asteroid = Instantiate(_asteroidPrefab, spawnPoint, rotation);
 						asteroid.Size = Random.Range(asteroid.MinSize, asteroid.MaxSize);
 						
-						// Íàïðàâëåíèå îòðèöàòåëüíîå òàê êàê èçíà÷àëüíî àñòåðîèä äâèæåòñÿ èç êððóãà, à íàäî â êðóã
+						// ÐÐ°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¾Ñ‚Ñ€Ð¸Ñ†Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð¾Ðµ Ñ‚Ð°Ðº ÐºÐ°Ðº Ð¸Ð·Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ð¾ Ð°ÑÑ‚ÐµÑ€Ð¾Ð¸Ð´ Ð´Ð²Ð¸Ð¶ÐµÑ‚ÑÑ Ð¸Ð· ÐºÑ€Ñ€ÑƒÐ³Ð°, Ð° Ð½Ð°Ð´Ð¾ Ð² ÐºÑ€ÑƒÐ³
 						asteroid.SetTrajectory(rotation * -spawnDirection);
 						_spawnedObjects.Add(asteroid);
 					}

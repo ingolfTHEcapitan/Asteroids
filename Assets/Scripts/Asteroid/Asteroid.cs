@@ -32,7 +32,7 @@ namespace Asteroids
 			_animator = GetComponent<Animator>();
 			_polygonCollider2D = GetComponent<PolygonCollider2D>();
 			
-			// Отключаем аниматор что бы не перезаписать спрайты астеройда пока нам не понадобится анимация
+			// РћС‚РєР»СЋС‡Р°РµРј Р°РЅРёРјР°С‚РѕСЂ С‡С‚Рѕ Р±С‹ РЅРµ РїРµСЂРµР·Р°РїРёСЃР°С‚СЊ СЃРїСЂР°Р№С‚С‹ Р°СЃС‚РµСЂРѕР№РґР° РїРѕРєР° РЅР°Рј РЅРµ РїРѕРЅР°РґРѕР±РёС‚СЃСЏ Р°РЅРёРјР°С†РёСЏ
 			_animator.enabled = false;
 		}
 
@@ -51,8 +51,8 @@ namespace Asteroids
 		public void UpdateColliderShape()
 		{
 			List<Vector2> physicsShape = new List<Vector2>();
-			_spriteRenderer.sprite.GetPhysicsShape(0, physicsShape);  // Получаем первую форму (если их несколько)
-			_polygonCollider2D.SetPath(0, physicsShape);  // Применяем форму к коллайдеру
+			_spriteRenderer.sprite.GetPhysicsShape(0, physicsShape);  // РџРѕР»СѓС‡Р°РµРј РїРµСЂРІСѓСЋ С„РѕСЂРјСѓ (РµСЃР»Рё РёС… РЅРµСЃРєРѕР»СЊРєРѕ)
+			_polygonCollider2D.SetPath(0, physicsShape);  // РџСЂРёРјРµРЅСЏРµРј С„РѕСЂРјСѓ Рє РєРѕР»Р»Р°Р№РґРµСЂСѓ
 		}
 		
 		public void SetTrajectory(Vector3 direction)
@@ -60,7 +60,7 @@ namespace Asteroids
 			_rigidbody2D.AddForce(direction * Speed);
 		}
 
-		void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
 		{
 			if (!_isDestroyed && collision.gameObject.GetComponent<Laser>() != null)
 			{
@@ -69,11 +69,11 @@ namespace Asteroids
 					GameEvents.OnAsteroidSplitted(this);
 				}
 				
-				// Переключаем коладер в редим тригера что бы избежать столкновений
+				// РџРµСЂРµРєР»СЋС‡Р°РµРј РєРѕР»Р°РґРµСЂ РІ СЂРµРґРёРј С‚СЂРёРіРµСЂР° С‡С‚Рѕ Р±С‹ РёР·Р±РµР¶Р°С‚СЊ СЃС‚РѕР»РєРЅРѕРІРµРЅРёР№
 				_polygonCollider2D.isTrigger = true;
 				
 				_isDestroyed = true;
-				// Включаем аниматор что бы проиграть анимацию взрыва
+				// Р’РєР»СЋС‡Р°РµРј Р°РЅРёРјР°С‚РѕСЂ С‡С‚Рѕ Р±С‹ РїСЂРѕРёРіСЂР°С‚СЊ Р°РЅРёРјР°С†РёСЋ РІР·СЂС‹РІР°
 				_animator.enabled = true;
 				_animator.Play("AsteroidExplosion");
 				GameEvents.OnAsteroidExploded(this);

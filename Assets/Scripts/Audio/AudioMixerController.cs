@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Asteroids
 {
-	public class AudioMixerControler : MonoBehaviour
+	public class AudioMixerController : MonoBehaviour
 	{
 		[Header("AudioMixer")]
 		[SerializeField] private AudioMixer _audioMixer;

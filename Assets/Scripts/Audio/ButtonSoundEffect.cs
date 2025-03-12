@@ -18,6 +18,5 @@ namespace Asteroids
 		{
 			_audioSource.PlayOneShot(_pointerEnter);
 		}
-
 	}
 }

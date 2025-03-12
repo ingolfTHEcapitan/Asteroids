@@ -87,7 +87,7 @@ AnimationClip:
   - time: 0.5
     functionName: DestroyAsteroid
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 6d3e5ed34d5de4d47b72ebb0d89e5233, type: 3}
+    objectReferenceParameter: {fileID: 11500000, guid: c2e54794aa784994fab3c7afa9a76a52, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

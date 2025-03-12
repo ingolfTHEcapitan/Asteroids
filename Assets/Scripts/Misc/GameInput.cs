@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Asteroids
 {
@@ -7,11 +6,11 @@ namespace Asteroids
 	{
 		public static GameInput Instance { get; private set;}
 
-		public Vector2 MovementInput { get => SpaceshipInputActions.Keyboard.Move.ReadValue<Vector2>();}
-		public float RotationInput { get => SpaceshipInputActions.Keyboard.Rotation.ReadValue<float>();}
-		public SpaceshipInputActions SpaceshipInputActions { get; set;}
+		public Vector2 MovementInput => SpaceshipInputActions.Keyboard.Move.ReadValue<Vector2>();
+		public float RotationInput => SpaceshipInputActions.Keyboard.Rotation.ReadValue<float>();
+		public SpaceshipInputActions SpaceshipInputActions { get; private set;}
 
-		void Awake()
+		private void Awake()
 		{
 			if (Instance != null && Instance != this)
 				Destroy(Instance);
@@ -23,8 +22,8 @@ namespace Asteroids
 			SpaceshipInputActions.Keyboard.Disable();
 			
 		}
-		
-		void OnEnable() => GameEvents.PlayerTakeHit += OnPlayerTakeHit;
+
+		private void OnEnable() => GameEvents.PlayerTakeHit += OnPlayerTakeHit;
 		
 		private void OnPlayerTakeHit()
 		{

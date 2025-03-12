@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Asteroids.ScreenWrapping;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Asteroids
 {
@@ -12,16 +9,16 @@ namespace Asteroids
 		
 		public static Player Instance { get; private set; }
 		public int CurrentHealth {get; private set;}
-        public int MaxHealth { get => _maxHealth;}
-
-        void Awake()
+		
+		
+        public void Awake()
 		{
 			if (Instance != null && Instance != this)
 				Destroy(Instance);
 			else
 				Instance = this;
 			
-			CurrentHealth = MaxHealth;
+			CurrentHealth = _maxHealth;
 		}
 
 		private void OnEnable()
@@ -38,7 +35,7 @@ namespace Asteroids
 		
 		private void OnPlayerDied()
 		{
-			CurrentHealth = MaxHealth;
+			CurrentHealth = _maxHealth;
 			transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
 		}
 	}

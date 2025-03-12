@@ -3,17 +3,17 @@ using UnityEngine;
 
 namespace Asteroids
 {
-	public enum SoundType
-	{
-		Laser,
-		Explosion,
-		Dead,
-		Hurt
-	}
-	
 	[RequireComponent(typeof(AudioSource)), ExecuteInEditMode]
 	public class SoundManager : MonoBehaviour
 	{
+		private enum SoundType
+		{
+			Laser,
+			Explosion,
+			Dead,
+			Hurt
+		}
+		
 		[SerializeField] private Sound[] _soundList;
 		[SerializeField] private AudioSource _musicSource;
 		
@@ -79,8 +79,6 @@ namespace Asteroids
 		[SerializeField] private AudioClip[] _audioClips;
 
 		public string Name {set => _name = value; }
-		public AudioClip[] AudioClips { get => _audioClips;}
+		public AudioClip[] AudioClips => _audioClips;
 	}
-	
-	
 }

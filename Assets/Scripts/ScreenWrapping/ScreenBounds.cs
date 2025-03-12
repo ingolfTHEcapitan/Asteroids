@@ -25,17 +25,15 @@ namespace Asteroids
 		{
 			// orthographicSize равен половине высоты камеры, умножением на два получается высота камеры
 			float ySize = _mainCamera.orthographicSize * 2;
-			// Ширина камеры равна высоте камеры умноженое на соотношение сторон
-			Vector2 boxColiderSize = new Vector2(ySize * _mainCamera.aspect, ySize);
-			_boxCollider2D.size = boxColiderSize;
+			// Ширина камеры равна высоте камеры умноженное на соотношение сторон
+			Vector2 boxColliderSize = new Vector2(ySize * _mainCamera.aspect, ySize);
+			_boxCollider2D.size = boxColliderSize;
 		}
 
-		void OnTriggerExit2D(Collider2D collider)
+		private void OnTriggerExit2D(Collider2D other)
 		{
-			GameEvents.OnExitTriggerFired(collider);          
+			GameEvents.OnExitTriggerFired(other);          
 		}
-
-		
 	}
 }
 

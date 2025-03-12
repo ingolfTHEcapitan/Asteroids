@@ -1,10 +1,12 @@
+using Asteroids.ScreenWrapping;
 using UnityEngine;
 
 namespace Asteroids
 {
+	[RequireComponent(typeof(BoxCollider2D))]
 	public class ScreenWrap : MonoBehaviour
 	{
-		// Смещение при телепортации на другю сторону экрана что бы оказатся на экране а не за его пределами
+		// Смещение при телепортации на другую сторону экрана, что бы оказаться на экране, а не за его пределами
 		[SerializeField] private float _teleportOffset = 0.2f;
 		[SerializeField] protected float _cornerOffset = 1f;
 		
@@ -13,19 +15,22 @@ namespace Asteroids
 		private void Awake() 
 		{
 			_boxCollider2D = GetComponent<BoxCollider2D>();
-			GameEvents.ExitTriggerFired += ColiderWrapper;
 		}
+
+		private void OnEnable() => GameEvents.ExitTriggerFired += ColliderWrapper;
+		private void OnDisable() => GameEvents.ExitTriggerFired -= ColliderWrapper;
+
 		
-		public void ColiderWrapper(Collider2D collider)
+		private void ColliderWrapper(Collider2D other)
 	   	{
-			if (collider.TryGetComponent<IScreenWrappable>(out var _))
+			if (other.TryGetComponent<IScreenWrappable>(out var _))
 			{
-				Vector3 newPosition = CalculateWrappedPosirion(collider.transform.position);
-				collider.gameObject.transform.position = newPosition;
+				Vector3 newPosition = CalculateWrappedPosition(other.transform.position);
+				other.gameObject.transform.position = newPosition;
 			}
 	   	}
-		
-		public Vector3 CalculateWrappedPosirion(Vector3 worldPosition)
+
+		private Vector3 CalculateWrappedPosition(Vector3 worldPosition)
 		{
 			// Находимся ли мы за экраном по ширине или высоте
 			// На основе этого можно решить в какую позицию телепортировать игрока или объект.
@@ -62,9 +67,5 @@ namespace Asteroids
 			}	
 		}	
 		
-		private void OnDestroy()
-		{
-			GameEvents.ExitTriggerFired -= ColiderWrapper;
-		}
 	}
 }

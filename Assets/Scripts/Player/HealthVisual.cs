@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,18 +9,18 @@ namespace Asteroids
 		[SerializeField] private Sprite _emptyHeart;
 		[SerializeField] private Sprite _fullHeart;
 		
-		private int _value;
-		private int _maxValue;
-		
-		
-		private void Awake() 
+		private void OnEnable()
 		{
-			_maxValue = Player.Instance.MaxHealth;
-			
 			GameEvents.PlayerRespawned += HealthChange;
 			GameEvents.PlayerDied += OnPlayerDied;
 		}
-		
+
+		private void OnDisable()
+		{
+			GameEvents.PlayerRespawned -= HealthChange;
+			GameEvents.PlayerDied -= OnPlayerDied;
+		}
+
 		private void HealthChange(int currentHealth)
 		{
 			for (int i = 0; i < _hearts.Length; i++)

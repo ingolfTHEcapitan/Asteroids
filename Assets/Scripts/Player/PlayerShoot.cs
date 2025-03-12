@@ -8,26 +8,26 @@ namespace Asteroids
 		[SerializeField] private Transform _laserSpawnPoint;
 		[SerializeField] private float _fireRate;
 		
-		private float _curentReloadTime;
+		private float _currentReloadTime;
 
 		private void OnEnable() => GameEvents.PlayerShooted += OnPlayerShooted;
 		private void OnDestroy() => GameEvents.PlayerShooted -= OnPlayerShooted;
-		
-		public void OnPlayerShooted()
+
+		private void OnPlayerShooted()
 		{
-			if (_curentReloadTime <= 0)
+			if (_currentReloadTime <= 0)
 			{
 				Laser laser = Instantiate(_laserPrafab, _laserSpawnPoint.position, transform.rotation);
 				laser.Project(transform.up);
-				_curentReloadTime = 1 / _fireRate;
+				_currentReloadTime = 1 / _fireRate;
 			}
 		}
 
 		public void Update()
 		{
-			if (_curentReloadTime > 0)
+			if (_currentReloadTime > 0)
 			{
-				_curentReloadTime -= Time.deltaTime;
+				_currentReloadTime -= Time.deltaTime;
 			}
 		}
 	}

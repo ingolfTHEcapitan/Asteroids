@@ -5,6 +5,7 @@ namespace Asteroids
 	public class Laser : MonoBehaviour
 	{
 		[SerializeField] private float _speed = 500f;
+		
 		private Rigidbody2D _rigidbody2D;
 		
 		private void Awake() 

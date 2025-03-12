@@ -3322,9 +3322,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _asteroidPrefab: {fileID: 4638799115538287464, guid: 0108c0c6ede660c4ab9f0e84a99af469, type: 3}
+  _spawnAmount: 3
   _spawnDelay: 5
-  _spawnAmount: 2
-  _spawnDistanse: 18
+  _spawnDistance: 18
   _trajectoryVariance: 15
   _maxAsteroidsAtTime: 12
 --- !u!1 &638649076

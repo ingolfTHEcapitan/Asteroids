@@ -1,1 +1,4 @@
-public interface IScreenWrappable { }
+namespace Asteroids.ScreenWrapping
+{
+    public interface IScreenWrappable { }
+}

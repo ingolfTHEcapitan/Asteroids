@@ -1,14 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
+using Asteroids.ScreenWrapping;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Asteroids
 {
 	[RequireComponent(typeof(SpriteRenderer))]
 	[RequireComponent(typeof(Rigidbody2D))]
+	[RequireComponent(typeof(Animator))]
+	[RequireComponent(typeof(PolygonCollider2D))]
 	public class Asteroid : MonoBehaviour, IScreenWrappable
 	{
-		[SerializeField] private Sprite[] _asteroids;
+		[SerializeField] private Sprite[] _asteroidsSprites;
 		[SerializeField] private float _minSize = 0.5f;
 		[SerializeField] private float _maxSize = 1.5f;
 		[SerializeField] private float _speed = 50;
@@ -17,15 +20,14 @@ namespace Asteroids
 		private Rigidbody2D _rigidbody2D;
 		private Animator _animator;
 		private PolygonCollider2D _polygonCollider2D;
-		private float _size = 1.0f;
 		private bool _isDestroyed = false;
-
-		public float Size { get => _size; set => _size = value; }
+		
+		public static readonly List<Asteroid> Asteroids = new List<Asteroid>();
+		public float Size { get; private set; } = 1.0f;
 		public float MaxSize { get => _maxSize; private set => _maxSize = value; }
-		public float MinSize { get => _minSize; private set => _minSize = value; }
-        public float Speed { get => _speed; private set => _speed = value; }
 
-        void Awake()
+		
+		private void Awake()
 		{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_rigidbody2D = GetComponent<Rigidbody2D>();
@@ -34,13 +36,23 @@ namespace Asteroids
 			
 			// Отключаем аниматор что бы не перезаписать спрайты астеройда пока нам не понадобится анимация
 			_animator.enabled = false;
+			Asteroids.Add(this);
 		}
 
-		private void OnEnable() => GameEvents.PlayerDied += NewGame;
+		private void OnEnable()
+		{
+			GameEvents.PlayerDied += NewGame;
+			GameEvents.AsteroidExploded += RemoveAsteroid;
+		}
 
+		private static void RemoveAsteroid(Asteroid asteroid)
+		{
+			Asteroids.Remove(asteroid);
+		}
+		
 		private void Start()
 		{
-			_spriteRenderer.sprite = _asteroids[Random.Range(0, _asteroids.Length)];
+			_spriteRenderer.sprite = _asteroidsSprites[Random.Range(0, _asteroidsSprites.Length)];
 			UpdateColliderShape();
 			
 			transform.eulerAngles = new Vector3(0, 0, Random.value * 360.0f);
@@ -48,18 +60,35 @@ namespace Asteroids
 			_rigidbody2D.mass = Size;
 		}
 		
-		public void UpdateColliderShape()
+		public void ParentInitialize(Vector3 direction)
+		{
+			Size = Random.Range(_minSize, MaxSize);
+			SetTrajectory(direction);
+		}
+		
+		public void ChildInitialize(Vector3 direction, Asteroid parentAsteroid)
+		{
+			Size = parentAsteroid.Size * 0.5f;
+			SetTrajectory(direction * _speed);
+		}
+		
+		public void DestroyAsteroid()
+		{
+			Destroy(gameObject);
+		}
+		
+		private void UpdateColliderShape()
 		{
 			List<Vector2> physicsShape = new List<Vector2>();
 			_spriteRenderer.sprite.GetPhysicsShape(0, physicsShape);  // Получаем первую форму (если их несколько)
 			_polygonCollider2D.SetPath(0, physicsShape);  // Применяем форму к коллайдеру
 		}
 		
-		public void SetTrajectory(Vector3 direction)
+		private void SetTrajectory(Vector3 direction)
 		{
-			_rigidbody2D.AddForce(direction * Speed);
+			_rigidbody2D.AddForce(direction * _speed);
 		}
-
+		
         private void OnCollisionEnter2D(Collision2D collision)
 		{
 			if (!_isDestroyed && collision.gameObject.GetComponent<Laser>() != null)
@@ -69,7 +98,7 @@ namespace Asteroids
 					GameEvents.OnAsteroidSplitted(this);
 				}
 				
-				// Переключаем коладер в редим тригера что бы избежать столкновений
+				// Переключаем коллайдер в режим тригера, что бы избежать столкновений
 				_polygonCollider2D.isTrigger = true;
 				
 				_isDestroyed = true;
@@ -80,17 +109,12 @@ namespace Asteroids
 			}
 		}
 		
-		public void DestroyAsteroid()
-		{
-			Destroy(gameObject);
-		}
-		
 		private static void NewGame()
 		{
-			List<Asteroid> asteroids = new List<Asteroid>(FindObjectsOfType<Asteroid>());
-
-			foreach (Asteroid asteroid in asteroids)
+			foreach (var asteroid in Asteroids)
 				Destroy(asteroid.gameObject);
+			
+			Asteroids.Clear();
 		}
 	}
 }

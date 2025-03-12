@@ -20,6 +20,5 @@ namespace Asteroids
 		public static void OnExitTriggerFired(Collider2D collider) => ExitTriggerFired?.Invoke(collider);
 		public static void OnAsteroidExploded(Asteroid asteroid) => AsteroidExploded?.Invoke(asteroid);
 		public static void OnAsteroidSplitted(Asteroid asteroid) => AsteroidSplitted?.Invoke(asteroid);
-
 	}
 }

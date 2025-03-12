@@ -11,19 +11,19 @@ namespace Asteroids
 		private Rigidbody2D _rigidbody;
 		private Vector2 _inputMoving;
 		private float _inputRotation;
-		
-		void Awake()
+
+		private void Awake()
 		{
 			_rigidbody = GetComponent<Rigidbody2D>();
 		}
 
-		void Update()
+		public void Update()
 		{
 			_inputMoving = GameInput.Instance.MovementInput;
 			_inputRotation = GameInput.Instance.RotationInput;	
 		}
-		
-		void FixedUpdate()
+
+		private void FixedUpdate()
 		{
 			if (_inputMoving.magnitude != 0.0f)
 			{
@@ -35,8 +35,8 @@ namespace Asteroids
 				_rigidbody.AddTorque(_inputRotation * _turnSpeed);
 			}
 		}
-		
-		void OnCollisionEnter2D(Collision2D collision)
+
+		private void OnCollisionEnter2D(Collision2D collision)
 		{
 			if (collision.gameObject.GetComponent<Asteroid>() != null)
 			{

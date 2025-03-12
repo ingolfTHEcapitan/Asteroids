@@ -28,7 +28,7 @@ namespace Asteroids
 			{
 				for (int i = 0; i < _spawnAmount; i++)
 				{
-					if (Asteroid.Asteroids.Count < _maxAsteroidsAtTime)
+					if (Asteroid.Asteroids.Count <= _maxAsteroidsAtTime)
 					{
 						// Спавним астеройды внутри нормализованного круга, что бы они появлялись на краю
 						// На некотором растоянии от точки спавна.
@@ -46,7 +46,7 @@ namespace Asteroids
 					}
 					else
 					{
-						yield return new WaitUntil(() => Asteroid.Asteroids.Count < _maxAsteroidsAtTime);
+						yield return new WaitUntil(() => Asteroid.Asteroids.Count >= _maxAsteroidsAtTime);
 					}
 				}
 				

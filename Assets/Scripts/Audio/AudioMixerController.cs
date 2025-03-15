@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Asteroids.DataPersistence;
+using Asteroids.DataPersistence.Data;
 
 namespace Asteroids
 {
@@ -17,46 +19,49 @@ namespace Asteroids
 		[SerializeField] private Slider _uiSlider;
 		
 		private Dictionary<string, Slider> _volumeSliders;
+		private SaveData _gameSave;
 		
 		private void Start() 
 		{
+			_gameSave = SaveSystem.Load();
 			InitializeSliders();
-			LoadVolumeSettings();
 		}
 
 		private void InitializeSliders()
 		{
-			_volumeSliders = new Dictionary<string, Slider>
+			SetupSlider("MasterVolume", _masterSlider, _gameSave.MasterVolume);
+			SetupSlider("EffectsVolume", _effectsSlider, _gameSave.EffectsVolume);
+			SetupSlider("MusicVolume", _musicSlider, _gameSave.MusicVolume);
+			SetupSlider("UIVolume", _uiSlider, _gameSave.UIVolume);
+		}
+		
+		private void SetupSlider(string volumeName, Slider slider, float SavedValue)
+		{
+			slider.SetValueWithoutNotify(SavedValue);
+			slider.onValueChanged.AddListener((volume)=>
 			{
-				{"MasterVolume", _masterSlider},
-				{"EffectsVolume", _effectsSlider},
-				{"MusicVolume", _musicSlider},
-				{"UIVolume", _uiSlider}
-			};
+				SetVolume(volumeName, volume);
+			});
+			
 		}
 		
 		private void SetVolume(string volumeName, float volume)
 		{
 			_audioMixer.SetFloat(volumeName, Mathf.Log10(volume) * 20);
-			PlayerPrefs.SetFloat(volumeName, volume);
+			UpdateSaveData(volumeName, volume);
 		}
 		
-		private void LoadVolumeSettings()
+		private void UpdateSaveData(string volumeName, float volume)
 		{
-			foreach (var kvpSlider in _volumeSliders)
+			switch (volumeName)
 			{
-				string volumeName = kvpSlider.Key;
-				Slider slider = kvpSlider.Value;
-				
-				float savedVolume = PlayerPrefs.GetFloat(volumeName, 1.0f);
-				slider.value = savedVolume;
-				SetVolume(volumeName, savedVolume);
+				case "MasterVolume": _gameSave.MasterVolume = volume; break;
+				case "EffectsVolume": _gameSave.EffectsVolume = volume; break;
+				case "MusicVolume": _gameSave.MusicVolume = volume; break;
+				case "UIVolume": _gameSave.UIVolume = volume; break;
 			}
+			
+			SaveSystem.Save(_gameSave);
 		}
-
-		public void OnMasterVolumeChange(float volume) => SetVolume("MasterVolume", volume);
-		public void OnEffectsVolumeChange(float volume) => SetVolume("EffectsVolume", volume);
-		public void OnMusicVolumeChange(float volume) => SetVolume("MusicVolume", volume);
-		public void OnUIVolumeChange(float volume) => SetVolume("UIVolume", volume);
 	}
 }

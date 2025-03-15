@@ -2834,8 +2834,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioMixer: {fileID: 24100000, guid: 28da74d91b452c5498a34f3ccfe78642, type: 2}
   _masterSlider: {fileID: 970172349}
-  _effectsSlider: {fileID: 918161774}
-  _musicSlider: {fileID: 823360901}
+  _effectsSlider: {fileID: 823360901}
+  _musicSlider: {fileID: 918161774}
   _uiSlider: {fileID: 904762662}
 --- !u!4 &568812297
 Transform:
@@ -3802,7 +3802,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 'Best: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 672379efd58b6324d99f45843dc1c6d8, type: 2}
   m_sharedMaterial: {fileID: 6466488993921338279, guid: 672379efd58b6324d99f45843dc1c6d8, type: 2}
@@ -3896,8 +3896,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -230, y: -221.70999}
-  m_SizeDelta: {x: 300, y: 65}
+  m_AnchoredPosition: {x: -298.8999, y: -221.70999}
+  m_SizeDelta: {x: 437.8, y: 65}
   m_Pivot: {x: 0.5, y: 0.28411883}
 --- !u!1 &823360899
 GameObject:
@@ -5892,7 +5892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd24d0da55257494bbcea1b3a0dee4fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreText: {fileID: 1379410801}
+  _currentScoreText: {fileID: 1379410801}
   _highScoreText: {fileID: 763344618}
 --- !u!1 &1357807922
 GameObject:

@@ -1,14 +1,18 @@
+using Asteroids.DataPersistence;
+using Asteroids.DataPersistence.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Asteroids
 {
 	public class Score : MonoBehaviour
 	{
-		[SerializeField] private TextMeshProUGUI _scoreText;
+		[SerializeField] private TextMeshProUGUI _currentScoreText;
 		[SerializeField] private TextMeshProUGUI _highScoreText;
 		
-		private int _scoreCount;
+		private int _currentScore;
+		private SaveData _gameSave;
 		
 		private void OnEnable()
 		{
@@ -24,38 +28,44 @@ namespace Asteroids
 
 		private void Start()
 		{
-			_highScoreText.SetText($"{PlayerPrefs.GetInt("highScore", 0)}");
+			_gameSave = SaveSystem.Load();
+			UpdateHighScoreDisplay();
 		}
 		
 		public void ResetHighScore()
 		{
-			PlayerPrefs.DeleteKey("highScore");
-			_highScoreText.SetText($"{PlayerPrefs.GetInt("highScore", 0)}");
+			_gameSave.HighScore = 0;
+			SaveSystem.Save(_gameSave);
+			UpdateHighScoreDisplay();
 		}
 		
 		private void IncreaseScore(Asteroid asteroid)
 		{
 			// Вычисляем кол-во очков в зависимости от размера астеройда
-			_scoreCount += (int)((asteroid.MaxSize - asteroid.Size) * 100);
-			
-			_scoreText.text = $"{_scoreCount}";
-			UpdateScore();
+			_currentScore += (int)((asteroid.MaxSize - asteroid.Size) * 100);
+			_currentScoreText.text = _currentScore.ToString();
+			CheckHighScore();
 		}
 
-		private void UpdateScore()
+		private void CheckHighScore()
 		{
-			if (_scoreCount > PlayerPrefs.GetInt("highScore", 0))
+			if (_currentScore > _gameSave.HighScore)
 			{
-				PlayerPrefs.SetInt("highScore", _scoreCount);
-				
-				_highScoreText.SetText($"{PlayerPrefs.GetInt("highScore", _scoreCount)}");
+				_gameSave.HighScore = _currentScore;
+				SaveSystem.Save(_gameSave);
+				UpdateHighScoreDisplay();
 			}
 		}
 		
 		private void ResetScore()
 		{
-			_scoreCount = 0;
-			_scoreText.SetText($"{_scoreCount}");
+			_currentScore = 0;
+			_currentScoreText.text = _currentScore.ToString();
+		}
+		
+		private void UpdateHighScoreDisplay()
+		{
+			_highScoreText.text = "Best:" + _gameSave.HighScore;
 		}
 	}
 }
